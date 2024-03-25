@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .profile-info label {
+            font-weight: bold;
+        }
+        .profile-info input[type="text"],
+        .profile-info textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .profile-info textarea {
+            height: 100px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <form id="profile-form">
+            <div class="profile-info">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+            </div>
+            <div class="profile-info">
+                <label for="work-style">Work Style:</label>
+                <input type="text" id="work-style" name="work-style" required>
+            </div>
+            <div class="profile-info">
+                <label for="strengths">Strengths:</label>
+                <input type="text" id="strengths" name="strengths" required>
+            </div>
+            <div class="profile-info">
+                <label for="weaknesses">Weaknesses:</label>
+                <input type="text" id="weaknesses" name="weaknesses" required>
+            </div>
+            <div class="profile-info">
+                <label for="personality-traits">Personality Traits:</label>
+                <input type="text" id="personality-traits" name="personality-traits" required>
+            </div>
+            <div class="profile-info">
+                <label for="questions">Questions:</label>
+                <input type="text" id="questions" name="questions" required>
+            </div>
+            <div class="profile-info">
+                <label for="availability">Availability:</label>
+                <input type="text" id="availability" name="availability" required>
+            </div>
+            <div class="profile-info">
+                <label for="location-preference">Location Preference:</label>
+                <input type="text" id="location-preference" name="location-preference" required>
+            </div>
+            <button type="submit" class="btn">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // You can add your code here to handle form submission, like sending data to the server or storing it locally
+            alert('Changes saved successfully!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <div class="container">
+        <form id="profile-form">
+          <h1>Your Profile</h1>
+
+            <div class="profile-info">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+            </div>
+            <div class="profile-info">
+                <label for="work-style">Work Style:</label>
+                <input type="text" id="work-style" name="work-style" required>
+            </div>
+            <div class="profile-info">
+                <label for="strengths">Strengths:</label>
+                <input type="text" id="strengths" name="strengths" required>
+            </div>
+            <div class="profile-info">
+                <label for="weaknesses">Weaknesses:</label>
+                <input type="text" id="weaknesses" name="weaknesses" required>
+            </div>
+            <div class="profile-info">
+                <label for="personality-traits">Personality Traits:</label>
+                <input type="text" id="personality-traits" name="personality-traits" required>
+            </div>
+            <div class="profile-info">
+                <label for="questions">Questions:</label>
+                <input type="text" id="questions" name="questions" required>
+            </div>
+            <div class="profile-info">
+                <label for="availability">Availability:</label>
+                <input type="text" id="availability" name="availability" required>
+            </div>
+            <div class="profile-info">
+                <label for="location-preference">Location Preference:</label>
+                <input type="text" id="location-preference" name="location-preference" required>
+            </div>
+            <button type="submit" class="btn">Save Changes</button>
+          <button type="button" class="btn" onclick="window.location.href='profiles.html'">Back</button>
+
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // You can add your code here to handle form submission, like sending data to the server or storing it locally
+            alert('Changes saved successfully!');
+        });
+    </script>
+</body>
+</html>
