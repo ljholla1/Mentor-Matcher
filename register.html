@@ -13,8 +13,20 @@
   <div class="container">
     <h2>Create Your Profile</h2>
     <form>
+      <label for="profile_picture">Profile Picture:</label>
+      <input type="file" id="profile_picture" accept="image/*">
+      <br><br>
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" placeholder="Enter your first name">
+      <br><br>
+      <label for="last_name">Last Name:</label>
+      <input type="text" id="last_name" placeholder="Enter your last name">
+      <br><br>
+      <label for="role">Role at the Company:</label>
+      <input type="text" id="role" placeholder="Enter your role">
+      <br><br>
       <label for="user_type">Are you a Mentor or a Mentee?</label>
-      <select id="user_type">
+      <select id="user_type"
         <option value="mentor">Mentor</option>
         <option value="mentee">Mentee</option>
       </select>
@@ -69,10 +81,10 @@
       <textarea id="questions" rows="3"></textarea>
       <select id="questionSelection">
         <option value="1">Select a question</option>
-          <option value="2">Do you have any hobbies?</option>
-          <option value="3">Do you have any side hustles or projects?</option>
-          <option value="4">What's something valuable you've learned during your career?</option>
-          <option value="5">What's your favorite part of your day?</option>
+        <option value="2">Do you have any hobbies?</option>
+        <option value="3">Do you have any side hustles or projects?</option>
+        <option value="4">What's something valuable you've learned during your career?</option>
+        <option value="5">What's your favorite part of your day?</option>
         <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
       </select>
       <textarea id="questions" rows="3"></textarea>
