@@ -52,6 +52,49 @@ nav a:hover {
   z-index: 9999;
 }
 
+.request {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.request-buttons button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 12px;
+}
+
+.accept-btn {
+  background-color: green;
+}
+
+.deny-btn {
+  background-color: red;
+}
+
 #wrapper.popup-opened {
   transition-duration: 500ms;
   opacity: 0.1;
@@ -308,7 +351,7 @@ img {
 }
 
 .color2 {
-  color: #fafc6;
+  color: #fafc;
 }
 
 .color3 {
