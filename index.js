@@ -1,4 +1,4 @@
-// start by typing 'node server.js'into shell
+// start by typing 'node index.js'into shell
 // then open browser with "http://localhost:3000"
 // ctrl+c to terminate and get new line
 
