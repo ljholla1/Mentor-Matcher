@@ -106,7 +106,7 @@ client.connect()
           // Compare the provided password with the password stored in the database
           if (user.password === password) {
             // Passwords match, redirect to generator page
-            res.redirect('/generator.html');
+            res.redirect('/profiles.html');
           } else {
             // Passwords don't match, show error message
             res.status(401).send('Invalid password');
