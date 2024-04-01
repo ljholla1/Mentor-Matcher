@@ -157,6 +157,7 @@ function populateForm(profileData) {
     if (profileData.strengths.includes('JavaScript')) {
         document.getElementById('javascript').checked = true;
     }
+    // Populate other strengths checkboxes similarly
     if (profileData.strengths.includes('HTML5')) {
         document.getElementById('html5').checked = true;
     }

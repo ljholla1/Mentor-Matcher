@@ -12,7 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const uri = "mongodb+srv://connectionuser:M0ng0B0ng01@database.mdfo0su.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri);
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,6 +32,8 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+
 
 // Start the Express server
 client.connect()
@@ -170,33 +174,50 @@ client.connect()
       }
     });
     
-    app.get('/profiles', async (req, res) => {
-      try {
-        // Connect to the MongoDB server
-        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-    
-        // Connect to the database
-        const db = client.db(dbName);
-    
-        // Get the profiles collection
-        const profilesCollection = db.collection(profilesCollectionName);
-    
-        // Fetch all profiles from the collection
-        const profiles = await profilesCollection.find({}).toArray();
-    
-        // Close the connection
-        await client.close();
-    
-        // Send the profiles as JSON response
-        res.json(profiles);
-      } catch (error) {
-        console.error('Error fetching profiles:', error);
-        res.status(500).send('Internal Server Error');
-      }
-    });
-    
+// Define the route handler to fetch a detailed profile information for a specific user
+app.get('/profile/:userID', async (req, res) => {
+  const userID = req.params.userID;
+
+  try {
+    const userProfile = await profilesCollection.findOne({ userID });
+
+    if (!userProfile) {
+      return res.status(404).send('Profile not found');
+    }
+
+    res.json(userProfile);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// Route handler to fetch all profiles
+app.get('/profiles', async (req, res) => {
+  try {
+    const profiles = await profilesCollection.find({}).toArray();
+    res.json(profiles);
+  } catch (error) {
+    console.error('Error fetching profiles:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+// Route handler to fetch all profiles
+app.get('/profiles', async (req, res) => {
+  try {
+    const profiles = await profilesCollection.find({}).toArray();
+    res.json(profiles);
+  } catch (error) {
+    console.error('Error fetching profiles:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
     // New route handler to fetch detailed profile information for a specific user
+
     app.get('/profile/:userID', async (req, res) => {
       const userID = req.params.userID;
 
