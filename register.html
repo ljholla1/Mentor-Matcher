@@ -14,38 +14,36 @@
     <h2>Account Information</h2>
       <form id="registerForm" action="/register" method="POST">
         <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Create a username">
+        <input type="text" id="username" name="username" placeholder="Enter a username">
         <br><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Create a password">
+        <input type="password" id="password" name="password" placeholder="Enter a password">
         <br><br>
-      </form>
     <h2>Create Your Profile</h2>
-      <form>
         <label for="profile_picture">Profile Picture:</label>
         <input type="file" id="profile_picture" accept="image/*">
         <br><br>
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" placeholder="Enter your first name">
+        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name">
         <br><br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" placeholder="Enter your last name">
+        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name">
         <br><br>
         <label for="role">Role at the Company:</label>
-        <input type="text" id="role" placeholder="Enter your role">
+        <input type="text" id="role" name="role" placeholder="Enter your role">
         <br><br>
         <label for="linkedin">LinkedIn Profile:</label>
-        <input type="text" id="linkedin" placeholder="Enter your LinkedIn profile link">
+        <input type="text" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn profile link">
         <br><br>
         <label for="user_type">Are you a Mentor or a Mentee?</label>
-        <select id="user_type">
+        <select id="user_type" name="user_type">
           <option value="mentor">Mentor</option>
           <option value="mentee">Mentee</option>
         </select>
         <br><br>
         <label for="workstyle">Work Style: (If unfamiliar with work styles, reference this: <a
             href="https://asana.com/resources/work-styles" target="_blank">Asana: 6 Work Styles</a>)</label>
-        <select id="workstyle">
+        <select id="workstyle" name="workstyle">
           <option value="Cooperative">Collaborative</option>
           <option value="Independent/Logical">Independent</option>
           <option value="Idea-Oriented">Adaptive</option>
@@ -57,39 +55,39 @@
         <br><br>
         <label id="strengths" for="strengths">Strengths:</label><br><br>
         <!-- <textarea id="strengths" rows="3"></textarea> -->
-        <input type="checkbox" id="python" value="Python">
+        <input type="checkbox" id="python" name="python" value="Python">
         <label for="python">Python</label>
-        <input type="checkbox" id="javascript" value="JavaScript">
+        <input type="checkbox" id="javascript" name="javascript" value="JavaScript">
         <label for="javascript">JavaScript</label>
-        <input type="checkbox" id="html5" value="HTML5">
+        <input type="checkbox" id="html5" name="html5" value="HTML5">
         <label for="html5">HTML5</label>
-        <input type="checkbox" id="css" value="CSS">
+        <input type="checkbox" id="css" name="css" value="CSS">
         <label for="css">CSS</label>
         <br>
-        <input type="checkbox" id="sql" value="SQL">
+        <input type="checkbox" id="sql" name="sql" value="SQL">
         <label for="sql">SQL</label>
-        <input type="checkbox" id="java" value="Java">
+        <input type="checkbox" id="java" name="java" value="Java">
         <label for="java">Java</label>
         <br>
         <!-- <input type="checkbox" id="active" value="Active">
         <label for="active">Active</label> -->
         <br><br>
         <label id="weaknesses" for="weaknesses">Weaknesses:</label>
-        <textarea id="weaknesses" rows="3"></textarea>
+        <textarea id="weaknesses" name="weaknesses" rows="3"></textarea>
         <br><br>
         <label for="personality_traits">Personality Traits:</label>
         <br>
-          <input type="checkbox" id="friendlyCheckbox" value="friendly">
+          <input type="checkbox" id="friendlyCheckbox" name="friendlyCheckbox" value="friendly">
           <label for="friendlyCheckbox">Friendly</label><br>
-          <input type="checkbox" id="formalCheckbox" value="formal">
+          <input type="checkbox" id="formalCheckbox" name="formalCheckbox" value="formal">
           <label for="formalCheckbox">Formal</label><br>
-          <input type="checkbox" id="honestCheckbox" value="honest">
+          <input type="checkbox" id="honestCheckbox" name="honestCheckbox" value="honest">
           <label for="honestCheckbox">Honest</label><br>
-        <textarea id="personality_traits" rows="3"></textarea>
+        <textarea id="personality_traits" name="personality_traits rows="3"></textarea>
         <br><br>
 
-        <label for="questions">Get to Know You Questions:</label>
-        <select id="questionSelection">
+        <label for="questions1">Get to Know You Questions:</label>
+        <select id="questionSelection1" name="questionSelection1">
           <option value="1">Select a question</option>
           <option value="2">Do you have any hobbies?</option>
           <option value="3">Do you have any side hustles or projects?</option>
@@ -97,8 +95,8 @@
           <option value="5">What's your favorite part of your day?</option>
           <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
         </select>
-        <textarea id="questions" rows="3"></textarea>
-        <select id="questionSelection">
+        <textarea id="questions1" rows="3" name="questions1"></textarea>
+        <select id="questionSelection2" name="questionSelection2">
           <option value="1">Select a question</option>
           <option value="2">Do you have any hobbies?</option>
           <option value="3">Do you have any side hustles or projects?</option>
@@ -106,83 +104,166 @@
           <option value="5">What's your favorite part of your day?</option>
           <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
         </select>
-        <textarea id="questions" rows="3"></textarea>
+        <textarea id="questions2" name="questions2" rows="3"></textarea>
         <br><br>
 
         <label for="availability">Availability and Location Preference (Zoom, In-Office, etc) :</label><br><br>
-        <input type="checkbox" id="zoom" value="Zoom">
+        <input type="checkbox" id="zoom" name="zoom" value="Zoom">
         <label for="zoom">Zoom</label>
-        <input type="checkbox" id="office" value="In-Office">
+        <input type="checkbox" id="office" name="office" value="In-Office">
         <label for="office">In-Office</label>
-        <input type="checkbox" id="nonoffice" value="Non-Office">
+        <input type="checkbox" id="nonoffice" name="nonoffice" value="Non-Office">
         <label for="nonoffice">Non-Office</label><br>
-        <input type="checkbox" id="mondayCheckbox" value="monday">
+        <input type="checkbox" id="mondayCheckbox" name="mondayCheckbox" value="monday">
         <label for="mondayCheckbox">Mondays</label>
-        <input type="checkbox" id="tuesdayCheckbox" value="tuesday">
+        <input type="checkbox" id="tuesdayCheckbox" name="tuesdayCheckbox" value="tuesday">
         <label for="tuesdayCheckbox">Tuesdays</label>
-        <input type="checkbox" id="wednesdayCheckbox" value="wednesday">
+        <input type="checkbox" id="wednesdayCheckbox" name="wednesdayCheckbox" value="wednesday">
         <label for="wednesdayCheckbox">Wednesdays</label><br>
-        <input type="checkbox" id="thursdayCheckbox" value="thursday">
+        <input type="checkbox" id="thursdayCheckbox" name="thursdayCheckbox" value="thursday">
         <label for="thursdayCheckbox">Thursdays</label>
-        <input type="checkbox" id="fridayCheckbox" value="friday">
+        <input type="checkbox" id="fridayCheckbox" name="fridayCheckbox" value="friday">
         <label for="fridayCheckbox">Fridays</label>
-        <input type="checkbox" id="weekendsCheckbox" value="weekends">
+        <input type="checkbox" id="weekendsCheckbox" name="weekendsCheckbox" value="weekends">
         <label for="weekendsCheckbox">Weekends</label>
-        <input type="text" id="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
+        <input type="text" id="availability" name="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
 
-        <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button>
+        <!-- <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button> -->
+        <button type="submit">Submit</button>
         <button type="button" onclick="window.location.href='index.html'">Back</button>
       </form>
   </div>
 
 <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         // Function to handle the form submission for registration
-         function handleRegisterFormSubmission(event) {
-             event.preventDefault(); // Prevent the default form submission behavior
+    document.addEventListener("DOMContentLoaded", function() {
+    const registerForm = document.getElementById("registerForm");
 
-             const username = document.getElementById("username").value.trim();
-             const password = document.getElementById("password").value.trim();
+    if (registerForm) {
+      registerForm.addEventListener("submit", handleRegisterFormSubmission);
+    }
 
-             if (!username || !password) {
-                 alert("Please enter both username and password.");
-                 return;
-             }
+    // function handleRegisterFormSubmission(event) {
+    //   event.preventDefault();
 
-             registerUser({ username, password });
-         }
+    //   const formData = new FormData(registerForm);
 
-         // event listener for registration form submission
-         const registerForm = document.getElementById("registerForm");
-         if (registerForm) {
-             registerForm.addEventListener("submit", handleRegisterFormSubmission);
-         }
+    //   const credentials = {
+    //     // Extract profile information from the form data
+    //     username: formData.get("username"),
+    //     password: formData.get("password"),
+    //     first_name: formData.get("first_name"),
+    //     last_name: formData.get("last_name"),
+    //     role: formData.get("role"),
+    //     linkedin: formData.get("linkedin"),
+    //     user_type: formData.get("user_type"),
+    //     workstyle: formData.get("workstyle"),
+    //     strengths: [], // Array to hold selected strengths
+    //     weaknesses: formData.get("weaknesses"),
+    //     personality_traits: [], // Array to hold selected personality traits
+    //     questions: [ // Array to hold selected questions and answers
+    //       {
+    //         question: formData.get("questionSelection1"),
+    //         answer: formData.get("questions1")
+    //       },
+    //       {
+    //         question: formData.get("questionSelection2"),
+    //         answer: formData.get("questions2")
+    //       }
+    //     ],
+    //     availability: formData.get("availability"),
+    //     // Extract selected checkboxes for strengths
+    //     strengths: [
+    //       formData.get("python"),
+    //       formData.get("javascript"),
+    //       formData.get("html5"),
+    //       formData.get("css"),
+    //       formData.get("sql"),
+    //       formData.get("java")
+    //     ].filter(strength => strength !== null), // Filter out unchecked strengths
+    //     // Extract selected checkboxes for personality traits
+    //     personality_traits: [
+    //       formData.get("friendlyCheckbox"),
+    //       formData.get("formalCheckbox"),
+    //       formData.get("honestCheckbox")
+    //     ].filter(trait => trait !== null) // Filter out unchecked traits
+    //   };
 
-         // Function to register a new user
-         async function registerUser(credentials) {
-             try {
-                 const response = await fetch('/register', {
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify(credentials)
-                 });
+    //   registerUser(credentials);
+    // }
 
-                 if (response.ok) {
-                     alert("Registration successful! You can now login.");
-                     window.location.href = "index.html"; // Redirect to login page if registering is successful 
-                 } else {
-                     const errorMessage = await response.text();
-                     alert(errorMessage || "Failed to register. Please try again.");
-                 }
-             } catch (error) {
-                 console.error('Error:', error);
-                 alert("Failed to register. Please try again.");
-             }
-         }
-     });
+    function handleRegisterFormSubmission(event) {
+  event.preventDefault();
+
+  const formData = new FormData(registerForm);
+  const credentials = {
+    username: formData.get("username"),
+    password: formData.get("password"),
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    role: formData.get("role"),
+    linkedin: formData.get("linkedin"),
+    user_type: formData.get("user_type"),
+    workstyle: formData.get("workstyle"),
+    strengths: [], // Initialize strengths array
+    weaknesses: formData.get("weaknesses"),
+    personality_traits: [], // Initialize personality_traits array
+    questionSelection1: formData.get("questionSelection1"),
+    questions1: formData.get("questions1"),
+    questionSelection2: formData.get("questionSelection2"),
+    questions2: formData.get("questions2"),
+    availability: formData.get("availability"),
+    zoom: formData.has("zoom"), // Check if checkbox is checked
+    office: formData.has("office"), // Check if checkbox is checked
+    nonoffice: formData.has("nonoffice"), // Check if checkbox is checked
+    mondayCheckbox: formData.has("mondayCheckbox"), // Check if checkbox is checked
+    tuesdayCheckbox: formData.has("tuesdayCheckbox"), // Check if checkbox is checked
+    wednesdayCheckbox: formData.has("wednesdayCheckbox"), // Check if checkbox is checked
+    thursdayCheckbox: formData.has("thursdayCheckbox"), // Check if checkbox is checked
+    fridayCheckbox: formData.has("fridayCheckbox"), // Check if checkbox is checked
+    weekendsCheckbox: formData.has("weekendsCheckbox") // Check if checkbox is checked
+  };
+
+  // Populate strengths array with checked checkboxes
+  if (formData.has("python")) credentials.strengths.push("Python");
+  if (formData.has("javascript")) credentials.strengths.push("JavaScript");
+  if (formData.has("html5")) credentials.strengths.push("HTML5");
+  if (formData.has("css")) credentials.strengths.push("CSS");
+  if (formData.has("sql")) credentials.strengths.push("SQL");
+  if (formData.has("java")) credentials.strengths.push("Java");
+
+  // Populate personality_traits array with checked checkboxes
+  if (formData.has("friendlyCheckbox")) credentials.personality_traits.push("friendly");
+  if (formData.has("formalCheckbox")) credentials.personality_traits.push("formal");
+  if (formData.has("honestCheckbox")) credentials.personality_traits.push("honest");
+
+  registerUser(credentials);
+}
+
+
+    async function registerUser(credentials) {
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        });
+
+        if (response.ok) {
+          alert("Registration successful! You can now login.");
+          window.location.href = "index.html";
+        } else {
+          const errorMessage = await response.text();
+          alert(errorMessage || "Failed to register. Please try again.");
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert("Failed to register. Please try again.");
+      }
+    }
+  });
+    
 </script>
-
 </body>
 </html>
