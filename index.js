@@ -1,4 +1,5 @@
 // start by typing 'node server.js'into shell
+// then open browser with "http://localhost:3000"
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -15,7 +16,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files directly from their current directory
+app.use(express.static(__dirname));
+
 
 // Define route handlers
 app.get('/register', (req, res) => {
@@ -87,32 +91,36 @@ client.connect()
 
     // Login route handler
 
+
     app.post('/login', async (req, res) => {
       const { username, password } = req.body;
-
+    
+      console.log('Received login request:', { username, password });
+    
       try {
         if (!username || !password) {
           return res.status(400).send('Missing username or password');
         }
-
-        console.log('Received username:', username); // Log the username received in the request
-
+    
         // Query the database to find a user with the provided username
         const user = await usersCollection.findOne({ username });
-
-        console.log('User from database:', user); // Log the user found in the database
-
+    
+        console.log('User from database:', user);
+    
         if (user) {
           // Compare the provided password with the password stored in the database
           if (user.password === password) {
-            // Passwords match, redirect to generator page
+            // Passwords match, redirect to profiles page
+            console.log('Login successful for user:', username);
             res.redirect('/profiles.html');
           } else {
             // Passwords don't match, show error message
+            console.log('Invalid password for user:', username);
             res.status(401).send('Invalid password');
           }
         } else {
           // User not found, show error message
+          console.log('User not found:', username);
           res.status(401).send('User not found');
         }
       } catch (error) {
@@ -120,8 +128,7 @@ client.connect()
         res.status(500).send('Internal server error');
       }
     });
-
-
+    
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
