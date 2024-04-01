@@ -126,6 +126,8 @@ async function saveUserProfile(profileData) {
     }
 }
 
+
+
 // Event listener for form submission
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
@@ -145,3 +147,84 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     // Show success message
     alert('Changes saved successfully!');
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const registerForm = document.getElementById("registerForm");
+
+    if (registerForm) {
+      registerForm.addEventListener("submit", handleRegisterFormSubmission);
+    }
+
+    function handleRegisterFormSubmission(event) {
+  event.preventDefault();
+
+  const formData = new FormData(registerForm);
+  const credentials = {
+    username: formData.get("username"),
+    password: formData.get("password"),
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    role: formData.get("role"),
+    linkedin: formData.get("linkedin"),
+    user_type: formData.get("user_type"),
+    workstyle: formData.get("workstyle"),
+    strengths: [], // Initialize strengths array
+    weaknesses: formData.get("weaknesses"),
+    personality_traits: [], // Initialize personality_traits array
+    questionSelection1: formData.get("questionSelection1"),
+    questions1: formData.get("questions1"),
+    questionSelection2: formData.get("questionSelection2"),
+    questions2: formData.get("questions2"),
+    availability: formData.get("availability"),
+    zoom: formData.has("zoom"), // Check if checkbox is checked
+    office: formData.has("office"), // Check if checkbox is checked
+    nonoffice: formData.has("nonoffice"), // Check if checkbox is checked
+    mondayCheckbox: formData.has("mondayCheckbox"), // Check if checkbox is checked
+    tuesdayCheckbox: formData.has("tuesdayCheckbox"), // Check if checkbox is checked
+    wednesdayCheckbox: formData.has("wednesdayCheckbox"), // Check if checkbox is checked
+    thursdayCheckbox: formData.has("thursdayCheckbox"), // Check if checkbox is checked
+    fridayCheckbox: formData.has("fridayCheckbox"), // Check if checkbox is checked
+    weekendsCheckbox: formData.has("weekendsCheckbox") // Check if checkbox is checked
+  };
+
+  // Populate strengths array with checked checkboxes
+  if (formData.has("python")) credentials.strengths.push("Python");
+  if (formData.has("javascript")) credentials.strengths.push("JavaScript");
+  if (formData.has("html5")) credentials.strengths.push("HTML5");
+  if (formData.has("css")) credentials.strengths.push("CSS");
+  if (formData.has("sql")) credentials.strengths.push("SQL");
+  if (formData.has("java")) credentials.strengths.push("Java");
+
+  // Populate personality_traits array with checked checkboxes
+  if (formData.has("friendlyCheckbox")) credentials.personality_traits.push("friendly");
+  if (formData.has("formalCheckbox")) credentials.personality_traits.push("formal");
+  if (formData.has("honestCheckbox")) credentials.personality_traits.push("honest");
+
+  registerUser(credentials);
+}
+
+
+    async function registerUser(credentials) {
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        });
+
+        if (response.ok) {
+          alert("Changes updated!");
+          window.location.href = "index.html";
+        } else {
+          const errorMessage = await response.text();
+          alert(errorMessage || "Failed to register. Please try again.");
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert("Failed to register. Please try again.");
+      }
+    }
+  });
