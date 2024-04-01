@@ -46,6 +46,18 @@ select {
   font-size: 16px;
 }
 
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
 textarea {
   height: 100px;
 }

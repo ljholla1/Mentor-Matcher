@@ -11,119 +11,128 @@
 <body>
   <h1>Mentorship Matching Platform</h1>
   <div class="container">
+    <h2>Account Information</h2>
+      <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter a username">
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter a password">
+        <br><br>
+      </form>
     <h2>Create Your Profile</h2>
-    <form>
-      <label for="profile_picture">Profile Picture:</label>
-      <input type="file" id="profile_picture" accept="image/*">
-      <br><br>
-      <label for="first_name">First Name:</label>
-      <input type="text" id="first_name" placeholder="Enter your first name">
-      <br><br>
-      <label for="last_name">Last Name:</label>
-      <input type="text" id="last_name" placeholder="Enter your last name">
-      <br><br>
-      <label for="role">Role at the Company:</label>
-      <input type="text" id="role" placeholder="Enter your role">
-      <br><br>
-      <label for="linkedin">LinkedIn Profile:</label>
-      <input type="text" id="linkedin" placeholder="Enter your LinkedIn profile link">
-      <br><br>
-      <label for="user_type">Are you a Mentor or a Mentee?</label>
-      <select id="user_type"
-        <option value="mentor">Mentor</option>
-        <option value="mentee">Mentee</option>
-      </select>
-      <br><br>
-      <label for="workstyle">Work Style: (If unfamiliar with work styles, reference this: <a
-          href="https://asana.com/resources/work-styles" target="_blank">Asana: 6 Work Styles</a>)</label>
-      <select id="workstyle">
-        <option value="Cooperative">Collaborative</option>
-        <option value="Independent/Logical">Independent</option>
-        <option value="Idea-Oriented">Adaptive</option>
-        <option value="Detail-Oriented">Structured</option>
-        <option value="Supportive">Flexible</option>
-        <option value="Supportive">Proximity</option>
-      </select>
+      <form>
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" accept="image/*">
+        <br><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" placeholder="Enter your first name">
+        <br><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" placeholder="Enter your last name">
+        <br><br>
+        <label for="role">Role at the Company:</label>
+        <input type="text" id="role" placeholder="Enter your role">
+        <br><br>
+        <label for="linkedin">LinkedIn Profile:</label>
+        <input type="text" id="linkedin" placeholder="Enter your LinkedIn profile link">
+        <br><br>
+        <label for="user_type">Are you a Mentor or a Mentee?</label>
+        <select id="user_type"
+          <option value="mentor">Mentor</option>
+          <option value="mentee">Mentee</option>
+        </select>
+        <br><br>
+        <label for="workstyle">Work Style: (If unfamiliar with work styles, reference this: <a
+            href="https://asana.com/resources/work-styles" target="_blank">Asana: 6 Work Styles</a>)</label>
+        <select id="workstyle">
+          <option value="Cooperative">Collaborative</option>
+          <option value="Independent/Logical">Independent</option>
+          <option value="Idea-Oriented">Adaptive</option>
+          <option value="Detail-Oriented">Structured</option>
+          <option value="Supportive">Flexible</option>
+          <option value="Supportive">Proximity</option>
+        </select>
 
-      <br><br>
-      <label id="strengths" for="strengths">Strengths:</label><br><br>
-      <!-- <textarea id="strengths" rows="3"></textarea> -->
-      <input type="checkbox" id="python" value="Python">
-      <label for="python">Python</label>
-      <input type="checkbox" id="javascript" value="JavaScript">
-      <label for="javascript">JavaScript</label>
-      <input type="checkbox" id="html5" value="HTML5">
-      <label for="html5">HTML5</label>
-      <input type="checkbox" id="css" value="CSS">
-      <label for="css">CSS</label>
-      <br>
-      <input type="checkbox" id="sql" value="SQL">
-      <label for="sql">SQL</label>
-      <input type="checkbox" id="java" value="Java">
-      <label for="java">Java</label>
-      <br>
-      <!-- <input type="checkbox" id="active" value="Active">
-      <label for="active">Active</label> -->
-      <br><br>
-      <label id="weaknesses" for="weaknesses">Weaknesses:</label>
-      <textarea id="weaknesses" rows="3"></textarea>
-      <br><br>
-      <label for="personality_traits">Personality Traits:</label>
-      <br>
-        <input type="checkbox" id="friendlyCheckbox" value="friendly">
-        <label for="friendlyCheckbox">Friendly</label><br>
-        <input type="checkbox" id="formalCheckbox" value="formal">
-        <label for="formalCheckbox">Formal</label><br>
-        <input type="checkbox" id="honestCheckbox" value="honest">
-        <label for="honestCheckbox">Honest</label><br>
-      <textarea id="personality_traits" rows="3"></textarea>
-      <br><br>
+        <br><br>
+        <label id="strengths" for="strengths">Strengths:</label><br><br>
+        <!-- <textarea id="strengths" rows="3"></textarea> -->
+        <input type="checkbox" id="python" value="Python">
+        <label for="python">Python</label>
+        <input type="checkbox" id="javascript" value="JavaScript">
+        <label for="javascript">JavaScript</label>
+        <input type="checkbox" id="html5" value="HTML5">
+        <label for="html5">HTML5</label>
+        <input type="checkbox" id="css" value="CSS">
+        <label for="css">CSS</label>
+        <br>
+        <input type="checkbox" id="sql" value="SQL">
+        <label for="sql">SQL</label>
+        <input type="checkbox" id="java" value="Java">
+        <label for="java">Java</label>
+        <br>
+        <!-- <input type="checkbox" id="active" value="Active">
+        <label for="active">Active</label> -->
+        <br><br>
+        <label id="weaknesses" for="weaknesses">Weaknesses:</label>
+        <textarea id="weaknesses" rows="3"></textarea>
+        <br><br>
+        <label for="personality_traits">Personality Traits:</label>
+        <br>
+          <input type="checkbox" id="friendlyCheckbox" value="friendly">
+          <label for="friendlyCheckbox">Friendly</label><br>
+          <input type="checkbox" id="formalCheckbox" value="formal">
+          <label for="formalCheckbox">Formal</label><br>
+          <input type="checkbox" id="honestCheckbox" value="honest">
+          <label for="honestCheckbox">Honest</label><br>
+        <textarea id="personality_traits" rows="3"></textarea>
+        <br><br>
 
-      <label for="questions">Get to Know You Questions:</label>
-      <select id="questionSelection">
-        <option value="1">Select a question</option>
-        <option value="2">Do you have any hobbies?</option>
-        <option value="3">Do you have any side hustles or projects?</option>
-        <option value="4">What's something valuable you've learned during your career?</option>
-        <option value="5">What's your favorite part of your day?</option>
-        <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
-      </select>
-      <textarea id="questions" rows="3"></textarea>
-      <select id="questionSelection">
-        <option value="1">Select a question</option>
-        <option value="2">Do you have any hobbies?</option>
-        <option value="3">Do you have any side hustles or projects?</option>
-        <option value="4">What's something valuable you've learned during your career?</option>
-        <option value="5">What's your favorite part of your day?</option>
-        <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
-      </select>
-      <textarea id="questions" rows="3"></textarea>
-      <br><br>
+        <label for="questions">Get to Know You Questions:</label>
+        <select id="questionSelection">
+          <option value="1">Select a question</option>
+          <option value="2">Do you have any hobbies?</option>
+          <option value="3">Do you have any side hustles or projects?</option>
+          <option value="4">What's something valuable you've learned during your career?</option>
+          <option value="5">What's your favorite part of your day?</option>
+          <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
+        </select>
+        <textarea id="questions" rows="3"></textarea>
+        <select id="questionSelection">
+          <option value="1">Select a question</option>
+          <option value="2">Do you have any hobbies?</option>
+          <option value="3">Do you have any side hustles or projects?</option>
+          <option value="4">What's something valuable you've learned during your career?</option>
+          <option value="5">What's your favorite part of your day?</option>
+          <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
+        </select>
+        <textarea id="questions" rows="3"></textarea>
+        <br><br>
 
-      <label for="availability">Availability and Location Preference (Zoom, In-Office, etc) :</label><br><br>
-      <input type="checkbox" id="zoom" value="Zoom">
-      <label for="zoom">Zoom</label>
-      <input type="checkbox" id="office" value="In-Office">
-      <label for="office">In-Office</label>
-      <input type="checkbox" id="nonoffice" value="Non-Office">
-      <label for="nonoffice">Non-Office</label><br>
-      <input type="checkbox" id="mondayCheckbox" value="monday">
-      <label for="mondayCheckbox">Mondays</label>
-      <input type="checkbox" id="tuesdayCheckbox" value="tuesday">
-      <label for="tuesdayCheckbox">Tuesdays</label>
-      <input type="checkbox" id="wednesdayCheckbox" value="wednesday">
-      <label for="wednesdayCheckbox">Wednesdays</label>
-      <input type="checkbox" id="thursdayCheckbox" value="thursday">
-      <label for="thursdayCheckbox">Thursdays</label>
-      <input type="checkbox" id="fridayCheckbox" value="friday">
-      <label for="fridayCheckbox">Fridays</label>
-      <input type="checkbox" id="weekendsCheckbox" value="weekends">
-      <label for="weekendsCheckbox">Weekends</label>
-      <input type="text" id="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
+        <label for="availability">Availability and Location Preference (Zoom, In-Office, etc) :</label><br><br>
+        <input type="checkbox" id="zoom" value="Zoom">
+        <label for="zoom">Zoom</label>
+        <input type="checkbox" id="office" value="In-Office">
+        <label for="office">In-Office</label>
+        <input type="checkbox" id="nonoffice" value="Non-Office">
+        <label for="nonoffice">Non-Office</label><br>
+        <input type="checkbox" id="mondayCheckbox" value="monday">
+        <label for="mondayCheckbox">Mondays</label>
+        <input type="checkbox" id="tuesdayCheckbox" value="tuesday">
+        <label for="tuesdayCheckbox">Tuesdays</label>
+        <input type="checkbox" id="wednesdayCheckbox" value="wednesday">
+        <label for="wednesdayCheckbox">Wednesdays</label>
+        <input type="checkbox" id="thursdayCheckbox" value="thursday">
+        <label for="thursdayCheckbox">Thursdays</label>
+        <input type="checkbox" id="fridayCheckbox" value="friday">
+        <label for="fridayCheckbox">Fridays</label>
+        <input type="checkbox" id="weekendsCheckbox" value="weekends">
+        <label for="weekendsCheckbox">Weekends</label>
+        <input type="text" id="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
 
-      <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button>
-      <button type="button" onclick="window.location.href='index.html'">Back</button>
-    </form>
+        <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button>
+        <button type="button" onclick="window.location.href='index.html'">Back</button>
+      </form>
   </div>
 </body>
 
