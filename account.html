@@ -3,50 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="account.css">
+    <title>Edit User Profile</title>
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
+    <h1>Mentorship Matching Platform</h1>
     <div class="container">
-        <form id="profile-form">
-            <h1>Your Profile</h1>
+    <h2>Edit Account Information</h2>
+      <form id="accountForm" action="/account" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Edit username">
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Edit a password">
+        <br><br>
+        <h2>Edit Your Profile</h2>
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" accept="image/*">
+        <br><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Edit your first name">
+        <br><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Edit your last name">
+        <br><br>
+        <label for="role">Role at the Company:</label>
+        <input type="text" id="role" name="role" placeholder="Edit your role">
+        <br><br>
+        <label for="linkedin">LinkedIn Profile:</label>
+        <input type="text" id="linkedin" name="linkedin" placeholder="Edit your LinkedIn profile link">
+        <br><br>
+        <label for="user_type">Are you a Mentor or a Mentee?</label>
+        <select id="user_type" name="user_type">
+          <option value="mentor">Mentor</option>
+          <option value="mentee">Mentee</option>
+        </select>
+        <br><br>
+        <label for="workstyle">Work Style: (If unfamiliar with work styles, reference this: <a
+            href="https://asana.com/resources/work-styles" target="_blank">Asana: 6 Work Styles</a>)</label>
+        <select id="workstyle" name="workstyle">
+          <option value="Cooperative">Collaborative</option>
+          <option value="Independent/Logical">Independent</option>
+          <option value="Idea-Oriented">Adaptive</option>
+          <option value="Detail-Oriented">Structured</option>
+          <option value="Supportive">Flexible</option>
+          <option value="Supportive">Proximity</option>
+        </select>
 
-            <div class="profile-info">
-                <label for="role">Role:</label>
-                <input type="text" id="role" name="role" data-profile-field="role" required>
-            </div>
-            <div class="profile-info">
-                <label for="work-style">Work Style:</label>
-                <input type="text" id="work-style" name="work-style" data-profile-field="workStyle" required>
-            </div>
-            <div class="profile-info">
-                <label for="strengths">Strengths:</label>
-                <input type="text" id="strengths" name="strengths" data-profile-field="strengths" required>
-            </div>
-            <div class="profile-info">
-                <label for="weaknesses">Weaknesses:</label>
-                <input type="text" id="weaknesses" name="weaknesses" data-profile-field="weaknesses" required>
-            </div>
-            <div class="profile-info">
-                <label for="personality-traits">Personality Traits:</label>
-                <input type="text" id="personality-traits" name="personality-traits" data-profile-field="personalityTraits" required>
-            </div>
-            <div class="profile-info">
-                <label for="questions">Questions:</label>
-                <input type="text" id="questions" name="questions" data-profile-field="questions" required>
-            </div>
-            <div class="profile-info">
-                <label for="availability">Availability:</label>
-                <input type="text" id="availability" name="availability" data-profile-field="availability" required>
-            </div>
-            <div class="profile-info">
-                <label for="location-preference">Location Preference:</label>
-                <input type="text" id="location-preference" name="location-preference" data-profile-field="locationPreference" required>
-            </div>
-            <button type="submit" class="btn">Save Changes</button>
-            <button type="button" class="btn" onclick="window.location.href='profiles.html'">Back</button>
+        <br><br>
+        <label id="strengths" for="strengths">Strengths:</label><br><br>
+        <!-- <textarea id="strengths" rows="3"></textarea> -->
+        <input type="checkbox" id="python" name="python" value="Python">
+        <label for="python">Python</label>
+        <input type="checkbox" id="javascript" name="javascript" value="JavaScript">
+        <label for="javascript">JavaScript</label>
+        <input type="checkbox" id="html5" name="html5" value="HTML5">
+        <label for="html5">HTML5</label>
+        <input type="checkbox" id="css" name="css" value="CSS">
+        <label for="css">CSS</label>
+        <br>
+        <input type="checkbox" id="sql" name="sql" value="SQL">
+        <label for="sql">SQL</label>
+        <input type="checkbox" id="java" name="java" value="Java">
+        <label for="java">Java</label>
+        <br>
+        <!-- <input type="checkbox" id="active" value="Active">
+        <label for="active">Active</label> -->
+        <br><br>
+        <label id="weaknesses" for="weaknesses">Weaknesses:</label>
+        <textarea id="weaknesses" name="weaknesses" rows="3"></textarea>
+        <br><br>
+        <label for="personality_traits">Personality Traits:</label>
+        <br>
+          <input type="checkbox" id="friendlyCheckbox" name="friendlyCheckbox" value="friendly">
+          <label for="friendlyCheckbox">Friendly</label><br>
+          <input type="checkbox" id="formalCheckbox" name="formalCheckbox" value="formal">
+          <label for="formalCheckbox">Formal</label><br>
+          <input type="checkbox" id="honestCheckbox" name="honestCheckbox" value="honest">
+          <label for="honestCheckbox">Honest</label><br>
+        <textarea id="personality_traits" name="personality_traits rows="3"></textarea>
+        <br><br>
 
-        </form>
-    </div>
+        <label for="questions1">Get to Know You Questions:</label>
+        <select id="questionSelection1" name="questionSelection1">
+          <option value="1">Select a question</option>
+          <option value="2">Do you have any hobbies?</option>
+          <option value="3">Do you have any side hustles or projects?</option>
+          <option value="4">What's something valuable you've learned during your career?</option>
+          <option value="5">What's your favorite part of your day?</option>
+          <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
+        </select>
+        <textarea id="questions1" rows="3" name="questions1"></textarea>
+        <select id="questionSelection2" name="questionSelection2">
+          <option value="1">Select a question</option>
+          <option value="2">Do you have any hobbies?</option>
+          <option value="3">Do you have any side hustles or projects?</option>
+          <option value="4">What's something valuable you've learned during your career?</option>
+          <option value="5">What's your favorite part of your day?</option>
+          <option value="6">What are you looking for out of a Mentor/Mentee relationship?</option>
+        </select>
+        <textarea id="questions2" name="questions2" rows="3"></textarea>
+        <br><br>
+
+        <label for="availability">Availability and Location Preference (Zoom, In-Office, etc) :</label><br><br>
+        <input type="checkbox" id="zoom" name="zoom" value="Zoom">
+        <label for="zoom">Zoom</label>
+        <input type="checkbox" id="office" name="office" value="In-Office">
+        <label for="office">In-Office</label>
+        <input type="checkbox" id="nonoffice" name="nonoffice" value="Non-Office">
+        <label for="nonoffice">Non-Office</label><br>
+        <input type="checkbox" id="mondayCheckbox" name="mondayCheckbox" value="monday">
+        <label for="mondayCheckbox">Mondays</label>
+        <input type="checkbox" id="tuesdayCheckbox" name="tuesdayCheckbox" value="tuesday">
+        <label for="tuesdayCheckbox">Tuesdays</label>
+        <input type="checkbox" id="wednesdayCheckbox" name="wednesdayCheckbox" value="wednesday">
+        <label for="wednesdayCheckbox">Wednesdays</label><br>
+        <input type="checkbox" id="thursdayCheckbox" name="thursdayCheckbox" value="thursday">
+        <label for="thursdayCheckbox">Thursdays</label>
+        <input type="checkbox" id="fridayCheckbox" name="fridayCheckbox" value="friday">
+        <label for="fridayCheckbox">Fridays</label>
+        <input type="checkbox" id="weekendsCheckbox" name="weekendsCheckbox" value="weekends">
+        <label for="weekendsCheckbox">Weekends</label>
+        <input type="text" id="availability" name="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
+
+        <!-- <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button> -->
+        <button type="submit">Submit</button>
+        <button type="button" onclick="window.location.href='index.html'">Back</button>
+      </form>
+  </div>
 </body>
 </html>
