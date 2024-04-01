@@ -142,17 +142,103 @@
       registerForm.addEventListener("submit", handleRegisterFormSubmission);
     }
 
+    // function handleRegisterFormSubmission(event) {
+    //   event.preventDefault();
+
+    //   const formData = new FormData(registerForm);
+
+    //   const credentials = {
+    //     // Extract profile information from the form data
+    //     username: formData.get("username"),
+    //     password: formData.get("password"),
+    //     first_name: formData.get("first_name"),
+    //     last_name: formData.get("last_name"),
+    //     role: formData.get("role"),
+    //     linkedin: formData.get("linkedin"),
+    //     user_type: formData.get("user_type"),
+    //     workstyle: formData.get("workstyle"),
+    //     strengths: [], // Array to hold selected strengths
+    //     weaknesses: formData.get("weaknesses"),
+    //     personality_traits: [], // Array to hold selected personality traits
+    //     questions: [ // Array to hold selected questions and answers
+    //       {
+    //         question: formData.get("questionSelection1"),
+    //         answer: formData.get("questions1")
+    //       },
+    //       {
+    //         question: formData.get("questionSelection2"),
+    //         answer: formData.get("questions2")
+    //       }
+    //     ],
+    //     availability: formData.get("availability"),
+    //     // Extract selected checkboxes for strengths
+    //     strengths: [
+    //       formData.get("python"),
+    //       formData.get("javascript"),
+    //       formData.get("html5"),
+    //       formData.get("css"),
+    //       formData.get("sql"),
+    //       formData.get("java")
+    //     ].filter(strength => strength !== null), // Filter out unchecked strengths
+    //     // Extract selected checkboxes for personality traits
+    //     personality_traits: [
+    //       formData.get("friendlyCheckbox"),
+    //       formData.get("formalCheckbox"),
+    //       formData.get("honestCheckbox")
+    //     ].filter(trait => trait !== null) // Filter out unchecked traits
+    //   };
+
+    //   registerUser(credentials);
+    // }
+
     function handleRegisterFormSubmission(event) {
-      event.preventDefault();
+  event.preventDefault();
 
-      const formData = new FormData(registerForm);
-      const credentials = {
-        username: formData.get("username"),
-        password: formData.get("password")
-      };
+  const formData = new FormData(registerForm);
+  const credentials = {
+    username: formData.get("username"),
+    password: formData.get("password"),
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    role: formData.get("role"),
+    linkedin: formData.get("linkedin"),
+    user_type: formData.get("user_type"),
+    workstyle: formData.get("workstyle"),
+    strengths: [], // Initialize strengths array
+    weaknesses: formData.get("weaknesses"),
+    personality_traits: [], // Initialize personality_traits array
+    questionSelection1: formData.get("questionSelection1"),
+    questions1: formData.get("questions1"),
+    questionSelection2: formData.get("questionSelection2"),
+    questions2: formData.get("questions2"),
+    availability: formData.get("availability"),
+    zoom: formData.has("zoom"), // Check if checkbox is checked
+    office: formData.has("office"), // Check if checkbox is checked
+    nonoffice: formData.has("nonoffice"), // Check if checkbox is checked
+    mondayCheckbox: formData.has("mondayCheckbox"), // Check if checkbox is checked
+    tuesdayCheckbox: formData.has("tuesdayCheckbox"), // Check if checkbox is checked
+    wednesdayCheckbox: formData.has("wednesdayCheckbox"), // Check if checkbox is checked
+    thursdayCheckbox: formData.has("thursdayCheckbox"), // Check if checkbox is checked
+    fridayCheckbox: formData.has("fridayCheckbox"), // Check if checkbox is checked
+    weekendsCheckbox: formData.has("weekendsCheckbox") // Check if checkbox is checked
+  };
 
-      registerUser(credentials);
-    }
+  // Populate strengths array with checked checkboxes
+  if (formData.has("python")) credentials.strengths.push("Python");
+  if (formData.has("javascript")) credentials.strengths.push("JavaScript");
+  if (formData.has("html5")) credentials.strengths.push("HTML5");
+  if (formData.has("css")) credentials.strengths.push("CSS");
+  if (formData.has("sql")) credentials.strengths.push("SQL");
+  if (formData.has("java")) credentials.strengths.push("Java");
+
+  // Populate personality_traits array with checked checkboxes
+  if (formData.has("friendlyCheckbox")) credentials.personality_traits.push("friendly");
+  if (formData.has("formalCheckbox")) credentials.personality_traits.push("formal");
+  if (formData.has("honestCheckbox")) credentials.personality_traits.push("honest");
+
+  registerUser(credentials);
+}
+
 
     async function registerUser(credentials) {
       try {
