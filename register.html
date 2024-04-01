@@ -14,26 +14,26 @@
     <h2>Account Information</h2>
       <form id="registerForm" action="/register" method="POST">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter a username">
+        <input type="text" id="username" name="username" placeholder="Enter a username" maxlength="50">
         <br><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter a password">
+        <input type="password" id="password" name="password" placeholder="Enter a password" maxlength="50">
         <br><br>
     <h2>Create Your Profile</h2>
         <label for="profile_picture">Profile Picture:</label>
         <input type="file" id="profile_picture" accept="image/*">
         <br><br>
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name">
+        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" maxlength="50">
         <br><br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name">
+        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" maxlength="50">
         <br><br>
         <label for="role">Role at the Company:</label>
-        <input type="text" id="role" name="role" placeholder="Enter your role">
+        <input type="text" id="role" name="role" placeholder="Enter your role" maxlength="50">
         <br><br>
         <label for="linkedin">LinkedIn Profile:</label>
-        <input type="text" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn profile link">
+        <input type="text" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn profile link" maxlength="100">
         <br><br>
         <label for="user_type">Are you a Mentor or a Mentee?</label>
         <select id="user_type" name="user_type">
@@ -83,7 +83,7 @@
           <label for="formalCheckbox">Formal</label><br>
           <input type="checkbox" id="honestCheckbox" name="honestCheckbox" value="honest">
           <label for="honestCheckbox">Honest</label><br>
-        <textarea id="personality_traits" name="personality_traits rows="3"></textarea>
+        <textarea id="personality_traits" name="personality_traits" rows="3"></textarea>
         <br><br>
 
         <label for="questions1">Get to Know You Questions:</label>
