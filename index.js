@@ -57,71 +57,6 @@ client.connect()
       
     // Registration route handler
 
-    // app.post('/register', async (req, res) => {
-    //   const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
-    
-    //   try {
-    //     // Check if the username already exists in the database
-    //     const existingUser = await usersCollection.findOne({ username: username });
-    //     if (existingUser) {
-    //       return res.status(400).send('Username already exists. Please choose a different username.');
-    //     }
-    
-    //     // Generate unique userID
-    //     let userID = uuidv4();
-    
-    //     // Check if userID is unique (just in case)
-    //     let userWithSameIDExists = await usersCollection.findOne({ userID });
-    //     while (userWithSameIDExists) {
-    //       // If userID already exists, generate a new one
-    //       userID = uuidv4();
-    //       userWithSameIDExists = await usersCollection.findOne({ userID });
-    //     }
-    
-    //     // Insert user into the database with the unique userID
-    //     try {
-    //       await usersCollection.insertOne({ 
-    //         userID, 
-    //         username, 
-    //         password, 
-    //         first_name, 
-    //         last_name, 
-    //         role, 
-    //         linkedin, 
-    //         user_type, 
-    //         workstyle, 
-    //         strengths, 
-    //         weaknesses, 
-    //         personality_traits, 
-    //         questionSelection1, 
-    //         questions1, 
-    //         questionSelection2, 
-    //         questions2, 
-    //         availability, 
-    //         zoom, 
-    //         office, 
-    //         nonoffice, 
-    //         mondayCheckbox, 
-    //         tuesdayCheckbox, 
-    //         wednesdayCheckbox, 
-    //         thursdayCheckbox, 
-    //         fridayCheckbox, 
-    //         weekendsCheckbox 
-    //       });
-          
-    //       console.log('User registered successfully');
-    //       res.sendStatus(200); // Send success response
-    //     } catch (error) {
-    //       console.error('Error registering user:', error);
-    //       res.status(500).send('Failed to register user'); // Send error response
-    //     }
-    //   } catch (error) {
-    //     console.error('Error:', error); // Log any unexpected errors
-    //     res.status(500).send('Internal server error');
-    //   }
-    // });
-    
-
     app.post('/register', async (req, res) => {
       const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
     
@@ -235,6 +170,35 @@ client.connect()
       }
     });
     
+    // New route handler to fetch all profiles
+    app.get('/profiles', async (req, res) => {
+      try {
+        const allProfiles = await profilesCollection.find().toArray();
+        res.json(allProfiles);
+      } catch (error) {
+        console.error('Error fetching profiles:', error);
+        res.status(500).send('Internal server error');
+      }
+    });
+
+    // New route handler to fetch detailed profile information for a specific user
+    app.get('/profile/:userID', async (req, res) => {
+      const userID = req.params.userID;
+
+      try {
+        const userProfile = await profilesCollection.findOne({ userID });
+
+        if (!userProfile) {
+          return res.status(404).send('Profile not found');
+        }
+
+        res.json(userProfile);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        res.status(500).send('Internal server error');
+      }
+    });
+
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
