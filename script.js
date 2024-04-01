@@ -32,4 +32,34 @@ function filterProducts() {
   });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Fetch user profiles from the server
+  fetch('/profiles')
+    .then(response => response.json())
+    .then(profiles => {
+      // Generate profile cards based on the retrieved profiles
+      const profileContainer = document.getElementById('profile-container');
+
+      profiles.forEach(profile => {
+        const profileCard = document.createElement('div');
+        profileCard.classList.add('video');
+
+        // Customize the profile card based on profile data
+        profileCard.innerHTML = `
+          <div class="thumbnail">
+            <img src="${profile.profile_picture}" alt="Profile Picture">
+          </div>
+          <h2>${profile.first_name} ${profile.last_name}</h2>
+          <p>${profile.role}</p>
+          <!-- Add more profile information as needed -->
+        `;
+
+        // Append the profile card to the container
+        profileContainer.appendChild(profileCard);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching profiles:', error);
+    });
+});
 
