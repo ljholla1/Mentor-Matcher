@@ -11,7 +11,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const uri = "mongodb+srv://connectionuser:M0ng0B0ng01@database.mdfo0su.mongodb.net/?retryWrites=true&w=majority"; // Replace with your MongoDB URI
+const uri = "mongodb+srv://connectionuser:M0ng0B0ng01@database.mdfo0su.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
