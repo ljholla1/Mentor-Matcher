@@ -7,56 +7,46 @@
     <link rel="stylesheet" href="account.css">
 </head>
 <body>
-    //lalallala
     <div class="container">
         <form id="profile-form">
-          <h1>Your Profile</h1>
-          <div></div>
+            <h1>Your Profile</h1>
 
             <div class="profile-info">
                 <label for="role">Role:</label>
-                <input type="text" id="role" name="role" required>
+                <input type="text" id="role" name="role" data-profile-field="role" required>
             </div>
             <div class="profile-info">
                 <label for="work-style">Work Style:</label>
-                <input type="text" id="work-style" name="work-style" required>
+                <input type="text" id="work-style" name="work-style" data-profile-field="workStyle" required>
             </div>
             <div class="profile-info">
                 <label for="strengths">Strengths:</label>
-                <input type="text" id="strengths" name="strengths" required>
+                <input type="text" id="strengths" name="strengths" data-profile-field="strengths" required>
             </div>
             <div class="profile-info">
                 <label for="weaknesses">Weaknesses:</label>
-                <input type="text" id="weaknesses" name="weaknesses" required>
+                <input type="text" id="weaknesses" name="weaknesses" data-profile-field="weaknesses" required>
             </div>
             <div class="profile-info">
                 <label for="personality-traits">Personality Traits:</label>
-                <input type="text" id="personality-traits" name="personality-traits" required>
+                <input type="text" id="personality-traits" name="personality-traits" data-profile-field="personalityTraits" required>
             </div>
             <div class="profile-info">
                 <label for="questions">Questions:</label>
-                <input type="text" id="questions" name="questions" required>
+                <input type="text" id="questions" name="questions" data-profile-field="questions" required>
             </div>
             <div class="profile-info">
                 <label for="availability">Availability:</label>
-                <input type="text" id="availability" name="availability" required>
+                <input type="text" id="availability" name="availability" data-profile-field="availability" required>
             </div>
             <div class="profile-info">
                 <label for="location-preference">Location Preference:</label>
-                <input type="text" id="location-preference" name="location-preference" required>
+                <input type="text" id="location-preference" name="location-preference" data-profile-field="locationPreference" required>
             </div>
             <button type="submit" class="btn">Save Changes</button>
-          <button type="button" class="btn" onclick="window.location.href='profiles.html'">Back</button>
+            <button type="button" class="btn" onclick="window.location.href='profiles.html'">Back</button>
 
         </form>
     </div>
-
-    <script>
-        document.getElementById('profile-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            // You can add your code here to handle form submission, like sending data to the server or storing it locally
-            alert('Changes saved successfully!');
-        });
-    </script>
 </body>
 </html>
