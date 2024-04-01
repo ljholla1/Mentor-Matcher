@@ -224,56 +224,6 @@
       document.getElementById("wrapper").classList.remove("popup-opened");
 
     }
-
-    // document.addEventListener("DOMContentLoaded", function() {
-    //   const profilesList = document.getElementById('profilesList');
-    //   const profileDetails = document.getElementById('profileDetails');
-
-    //   // Function to fetch all profiles
-    //   function fetchProfiles() {
-    //     fetch('/profiles')
-    //       .then(response => response.json())
-    //       .then(profiles => {
-    //         profilesList.innerHTML = ''; // Clear previous content
-
-    //         profiles.forEach(profile => {
-    //           const profileCard = document.createElement('div');
-    //           profileCard.innerHTML = `
-    //             <div>
-    //               <h2>${profile.first_name} ${profile.last_name}</h2>
-    //               <p><strong>Role:</strong> ${profile.role}</p>
-    //               <img src="${profile.profile_picture}" alt="Profile Picture">
-    //               <!-- Add more profile information here -->
-    //               <button onclick="showProfileDetails('${profile.userID}')">View Details</button>
-    //             </div>
-    //           `;
-    //           profilesList.appendChild(profileCard);
-    //         });
-    //       })
-    //       .catch(error => console.error('Error fetching profiles:', error));
-    //   }
-
-    //   // Function to show detailed profile information
-    //   function showProfileDetails(userID) {
-    //     fetch(`/profile/${userID}`)
-    //       .then(response => response.json())
-    //       .then(profile => {
-    //         profileDetails.innerHTML = ''; // Clear previous content
-
-    //         // Generate HTML to display detailed profile information
-    //         profileDetails.innerHTML = `
-    //           <h2>${profile.first_name} ${profile.last_name}</h2>
-    //           <p><strong>Role:</strong> ${profile.role}</p>
-    //           <!-- Add more detailed profile information here -->
-    //         `;
-    //       })
-    //       .catch(error => console.error('Error fetching profile details:', error));
-    //   }
-
-    //   // Fetch profiles when the page loads
-    //   fetchProfiles();
-    // });
-
     document.addEventListener("DOMContentLoaded", function () {
   // Fetch user profiles from the server
   fetch('/profiles')
@@ -287,15 +237,30 @@
         profileCard.classList.add('video');
         profileCard.setAttribute('data-tags', profile.tags ? profile.tags.join(', ') : ''); // Add a check for the existence of 'tags'
 
+        // Function to convert boolean values to tags
+        const booleanToTag = (key, value) => value ? `<span class="tag">${key}</span>` : '';
+
+        // Function to capitalize the first letter of a string
+        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
         // Customize the profile card based on profile data
         profileCard.innerHTML = `
           <div class="thumbnail">
             <img src="${profile.profile_picture}" alt="Profile Picture">
           </div>
           <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
-          <p>${profile.user_type}</p>
+          <p>${capitalize(profile.user_type)}</p>
           <div class="tags">
             ${profile.strengths ? profile.strengths.map(strength => `<span class="tag">${strength}</span>`).join('') : ''}
+            ${booleanToTag('Zoom', profile.zoom)}
+            ${booleanToTag('Office', profile.office)}
+            ${booleanToTag('Non-office', profile.nonoffice)}
+            ${booleanToTag('Mondays', profile.mondayCheckbox)}
+            ${booleanToTag('Tuesdays', profile.tuesdayCheckbox)}
+            ${booleanToTag('Wednesdays', profile.wednesdayCheckbox)}
+            ${booleanToTag('Thursdays', profile.thursdayCheckbox)}
+            ${booleanToTag('Fridays', profile.fridayCheckbox)}
+            ${booleanToTag('Weekends', profile.weekendsCheckbox)}
           </div>
         `;
 
@@ -307,6 +272,7 @@
       console.error('Error fetching profiles:', error);
     });
 });
+ß
 
   </script>
 </body>

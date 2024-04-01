@@ -1,134 +1,35 @@
-// // js for search queries:
+// js for search queries:
 
-// // Get the search input and filter checkboxes
-// const searchInput = document.getElementById('searchInput');
-// const checkboxes = document.querySelectorAll('.filterCheckboxes input[type="checkbox"]');
+// Get the search input and filter checkboxes
+const searchInput = document.getElementById('searchInput');
+const checkboxes = document.querySelectorAll('.filterCheckboxes input[type="checkbox"]');
 
-// // Add event listeners for search input and checkboxes
-// searchInput.addEventListener('input', filterProducts);
-// checkboxes.forEach(checkbox => {
-//   checkbox.addEventListener('change', filterProducts);
-// });
-
-// function filterProducts() {
-//   const searchTerm = searchInput.value.toLowerCase();
-//   const selectedTags = [...checkboxes].filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-
-//   const products = document.querySelectorAll('.video');
-//   products.forEach(product => {
-//     const productName = product.querySelector('h2').innerText.toLowerCase();
-//     const productTags = product.dataset.tags.split(',').map(tag => tag.trim());
-
-//     // Check if product name matches search term or has selected tags
-//     const matchesSearch = productName.includes(searchTerm);
-//     const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => productTags.includes(tag));
-
-//     // Show or hide product based on filter criteria
-//     if (matchesSearch && matchesTags) {
-//       product.style.display = 'block';
-//     } else {
-//       product.style.display = 'none';
-//     }
-//   });
-// }
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Fetch user profiles from the server
-//   fetch('/profiles')
-//     .then(response => response.json())
-//     .then(profiles => {
-//       // Generate profile cards based on the retrieved profiles
-//       const profileContainer = document.getElementById('profile-container');
-
-//       profiles.forEach(profile => {
-//         const profileCard = document.createElement('div');
-//         profileCard.classList.add('video');
-
-//         // Customize the profile card based on profile data
-//         profileCard.innerHTML = `
-//           <div class="thumbnail">
-//             <img src="${profile.profile_picture}" alt="Profile Picture">
-//           </div>
-//           <h2>${profile.first_name} ${profile.last_name}</h2>
-//           <p>${profile.role}</p>
-//           <!-- Add more profile information as needed -->
-//         `;
-
-//         // Append the profile card to the container
-//         profileContainer.appendChild(profileCard);
-//       });
-//     })
-//     .catch(error => {
-//       console.error('Error fetching profiles:', error);
-//     });
-// });
-
-
-
-
-// script.js
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Fetch user profiles from the server
-  fetch('/profiles')
-    .then(response => response.json())
-    .then(profiles => {
-      // Generate profile cards based on the retrieved profiles
-      const profileContainer = document.getElementById('profile-container');
-
-      profiles.forEach(profile => {
-        const profileCard = document.createElement('div');
-        profileCard.classList.add('video');
-
-        // Customize the profile card based on profile data
-        profileCard.innerHTML = `
-          <div class="thumbnail">
-            <img src="${profile.profile_picture}" alt="Profile Picture">
-          </div>
-          <h2>${profile.first_name} ${profile.last_name}</h2>
-          <p>${profile.role}</p>
-          <!-- Add more profile information as needed -->
-        `;
-
-        // Add data-tags attribute for filtering
-        profileCard.dataset.tags = profile.tags.join(', ');
-
-        // Append the profile card to the container
-        profileContainer.appendChild(profileCard);
-      });
-
-      // Add event listeners for search input and checkboxes after generating profile cards
-      const searchInput = document.getElementById('searchInput');
-      const checkboxes = document.querySelectorAll('.filterCheckboxes input[type="checkbox"]');
-
-      searchInput.addEventListener('input', filterProfiles);
-      checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', filterProfiles);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching profiles:', error);
-    });
+// Add event listeners for search input and checkboxes
+searchInput.addEventListener('input', filterProducts);
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', filterProducts);
 });
 
-function filterProfiles() {
+function filterProducts() {
   const searchTerm = searchInput.value.toLowerCase();
   const selectedTags = [...checkboxes].filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
 
-  const profiles = document.querySelectorAll('.video');
-  profiles.forEach(profile => {
-    const profileName = profile.querySelector('h2').innerText.toLowerCase();
-    const profileTags = profile.dataset.tags.split(',').map(tag => tag.trim());
+  const products = document.querySelectorAll('.video');
+  products.forEach(product => {
+    const productName = product.querySelector('h2').innerText.toLowerCase();
+    const productTags = product.dataset.tags.split(',').map(tag => tag.trim());
 
-    // Check if profile name matches search term or has selected tags
-    const matchesSearch = profileName.includes(searchTerm);
-    const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => profileTags.includes(tag));
+    // Check if product name matches search term or has selected tags
+    const matchesSearch = productName.includes(searchTerm);
+    const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => productTags.includes(tag));
 
-    // Show or hide profile based on filter criteria
+    // Show or hide product based on filter criteria
     if (matchesSearch && matchesTags) {
-      profile.style.display = 'block';
+      product.style.display = 'block';
     } else {
-      profile.style.display = 'none';
+      product.style.display = 'none';
     }
   });
 }
+
+
