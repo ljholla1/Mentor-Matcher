@@ -14,14 +14,12 @@
     <h2>Account Information</h2>
       <form id="registerForm" action="/register" method="POST">
         <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter a username">
+        <input type="text" id="username" name="username" placeholder="Enter a username">
         <br><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter a password">
+        <input type="password" id="password" name="password" placeholder="Enter a password">
         <br><br>
-      </form>
     <h2>Create Your Profile</h2>
-      <form>
         <label for="profile_picture">Profile Picture:</label>
         <input type="file" id="profile_picture" accept="image/*">
         <br><br>
@@ -130,59 +128,56 @@
         <label for="weekendsCheckbox">Weekends</label>
         <input type="text" id="availability" placeholder="E.g., Monday to Friday, 9am to 5pm">
 
-        <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button>
+        <!-- <button type="button" onclick="window.location.href = 'profiles.html'">Submit</button> -->
+        <button type="submit">Submit</button>
         <button type="button" onclick="window.location.href='index.html'">Back</button>
       </form>
   </div>
 
 <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         // Function to handle the form submission for registration
-         function handleRegisterFormSubmission(event) {
-             event.preventDefault(); // Prevent the default form submission behavior
+    document.addEventListener("DOMContentLoaded", function() {
+    const registerForm = document.getElementById("registerForm");
 
-             const username = document.getElementById("username").value.trim();
-             const password = document.getElementById("password").value.trim();
+    if (registerForm) {
+      registerForm.addEventListener("submit", handleRegisterFormSubmission);
+    }
 
-             if (!username || !password) {
-                 alert("Please enter both username and password.");
-                 return;
-             }
+    function handleRegisterFormSubmission(event) {
+      event.preventDefault();
 
-             registerUser({ username, password });
-         }
+      const formData = new FormData(registerForm);
+      const credentials = {
+        username: formData.get("username"),
+        password: formData.get("password")
+      };
 
-         // event listener for registration form submission
-         const registerForm = document.getElementById("registerForm");
-         if (registerForm) {
-             registerForm.addEventListener("submit", handleRegisterFormSubmission);
-         }
+      registerUser(credentials);
+    }
 
-         // Function to register a new user
-         async function registerUser(credentials) {
-             try {
-                 const response = await fetch('/register', {
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify(credentials)
-                 });
+    async function registerUser(credentials) {
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        });
 
-                 if (response.ok) {
-                     alert("Registration successful! You can now login.");
-                     window.location.href = "index.html"; // Redirect to login page if registering is successful 
-                 } else {
-                     const errorMessage = await response.text();
-                     alert(errorMessage || "Failed to register. Please try again.");
-                 }
-             } catch (error) {
-                 console.error('Error:', error);
-                 alert("Failed to register. Please try again.");
-             }
-         }
-     });
+        if (response.ok) {
+          alert("Registration successful! You can now login.");
+          window.location.href = "index.html";
+        } else {
+          const errorMessage = await response.text();
+          alert(errorMessage || "Failed to register. Please try again.");
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert("Failed to register. Please try again.");
+      }
+    }
+  });
+    
 </script>
-
 </body>
 </html>

@@ -54,6 +54,41 @@ client.connect()
       });
 
     // Registration route handler
+    // app.post('/register', async (req, res) => {
+    //   const { username, password } = req.body;
+
+    //   try {
+    //     // Check if the username already exists in the database
+    //     const existingUser = await usersCollection.findOne({ username: username });
+    //     if (existingUser) {
+    //       return res.status(400).send('Username already exists. Please choose a different username.');
+    //     }
+    //     // Generate unique userID
+    //     let userID = uuidv4();
+
+    //     // Check if userID is unique (just in case)
+    //     let userWithSameIDExists = await usersCollection.findOne({ userID });
+    //     while (userWithSameIDExists) {
+    //       // If userID already exists, generate a new one
+    //       userID = uuidv4();
+    //       userWithSameIDExists = await usersCollection.findOne({ userID });
+    //     }
+
+    //     // Insert user into the database with the unique userID
+    //     try {
+    //       await usersCollection.insertOne({ userID, username, password });
+    //       console.log('User registered successfully');
+    //       res.sendStatus(200); // Send success response
+    //     } catch (error) {
+    //       console.error('Error registering user:', error);
+    //       res.status(500).send('Failed to register user'); // Send error response
+    //     }
+    //   } catch (error) {
+    //     console.error('Error:', error); // Log any unexpected errors
+    //     res.status(500).send('Internal server error');
+    //   }
+    // });
+
     app.post('/register', async (req, res) => {
       const { username, password } = req.body;
 
