@@ -126,7 +126,50 @@ async function saveUserProfile(profileData) {
     }
 }
 
+// Function to populate form fields with profile data
+function populateForm(profileData) {
+    document.getElementById('username').value = profileData.username;
+    document.getElementById('first_name').value = profileData.first_name;
+    document.getElementById('last_name').value = profileData.last_name;
+    document.getElementById('role').value = profileData.role;
+    document.getElementById('linkedin').value = profileData.linkedin;
+    document.getElementById('user_type').value = profileData.user_type;
+    document.getElementById('workstyle').value = profileData.workstyle;
+    document.getElementById('weaknesses').value = profileData.weaknesses;
+    document.getElementById('personality_traits').value = profileData.personality_traits;
+    document.getElementById('availability').value = profileData.availability;
 
+    // Check the appropriate checkboxes based on profile data
+    document.getElementById('zoom').checked = profileData.zoom;
+    document.getElementById('office').checked = profileData.office;
+    document.getElementById('nonoffice').checked = profileData.nonoffice;
+    document.getElementById('mondayCheckbox').checked = profileData.mondayCheckbox;
+    document.getElementById('tuesdayCheckbox').checked = profileData.tuesdayCheckbox;
+    document.getElementById('wednesdayCheckbox').checked = profileData.wednesdayCheckbox;
+    document.getElementById('thursdayCheckbox').checked = profileData.thursdayCheckbox;
+    document.getElementById('fridayCheckbox').checked = profileData.fridayCheckbox;
+    document.getElementById('weekendsCheckbox').checked = profileData.weekendsCheckbox;
+
+    // Populate strengths checkboxes based on profile data
+    if (profileData.strengths.includes('Python')) {
+        document.getElementById('python').checked = true;
+    }
+    if (profileData.strengths.includes('JavaScript')) {
+        document.getElementById('javascript').checked = true;
+    }
+    if (profileData.strengths.includes('HTML5')) {
+        document.getElementById('html5').checked = true;
+    }
+    if (profileData.strengths.includes('CSS')) {
+        document.getElementById('css').checked = true;
+    }
+    if (profileData.strengths.includes('SQL')) {
+        document.getElementById('sql').checked = true;
+    }
+    if (profileData.strengths.includes('Java')) {
+        document.getElementById('java').checked = true;
+    }
+}
 
 // Event listener for form submission
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
@@ -148,83 +191,17 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     alert('Changes saved successfully!');
 });
 
-
-document.addEventListener("DOMContentLoaded", function() {
-    const registerForm = document.getElementById("registerForm");
-
-    if (registerForm) {
-      registerForm.addEventListener("submit", handleRegisterFormSubmission);
-    }
-
-    function handleRegisterFormSubmission(event) {
-  event.preventDefault();
-
-  const formData = new FormData(registerForm);
-  const credentials = {
-    username: formData.get("username"),
-    password: formData.get("password"),
-    first_name: formData.get("first_name"),
-    last_name: formData.get("last_name"),
-    role: formData.get("role"),
-    linkedin: formData.get("linkedin"),
-    user_type: formData.get("user_type"),
-    workstyle: formData.get("workstyle"),
-    strengths: [], // Initialize strengths array
-    weaknesses: formData.get("weaknesses"),
-    personality_traits: [], // Initialize personality_traits array
-    questionSelection1: formData.get("questionSelection1"),
-    questions1: formData.get("questions1"),
-    questionSelection2: formData.get("questionSelection2"),
-    questions2: formData.get("questions2"),
-    availability: formData.get("availability"),
-    zoom: formData.has("zoom"), // Check if checkbox is checked
-    office: formData.has("office"), // Check if checkbox is checked
-    nonoffice: formData.has("nonoffice"), // Check if checkbox is checked
-    mondayCheckbox: formData.has("mondayCheckbox"), // Check if checkbox is checked
-    tuesdayCheckbox: formData.has("tuesdayCheckbox"), // Check if checkbox is checked
-    wednesdayCheckbox: formData.has("wednesdayCheckbox"), // Check if checkbox is checked
-    thursdayCheckbox: formData.has("thursdayCheckbox"), // Check if checkbox is checked
-    fridayCheckbox: formData.has("fridayCheckbox"), // Check if checkbox is checked
-    weekendsCheckbox: formData.has("weekendsCheckbox") // Check if checkbox is checked
-  };
-
-  // Populate strengths array with checked checkboxes
-  if (formData.has("python")) credentials.strengths.push("Python");
-  if (formData.has("javascript")) credentials.strengths.push("JavaScript");
-  if (formData.has("html5")) credentials.strengths.push("HTML5");
-  if (formData.has("css")) credentials.strengths.push("CSS");
-  if (formData.has("sql")) credentials.strengths.push("SQL");
-  if (formData.has("java")) credentials.strengths.push("Java");
-
-  // Populate personality_traits array with checked checkboxes
-  if (formData.has("friendlyCheckbox")) credentials.personality_traits.push("friendly");
-  if (formData.has("formalCheckbox")) credentials.personality_traits.push("formal");
-  if (formData.has("honestCheckbox")) credentials.personality_traits.push("honest");
-
-  registerUser(credentials);
-}
-
-
-    async function registerUser(credentials) {
-      try {
-        const response = await fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
-        });
-
+// Fetch user profile data from the server and populate the form
+document.addEventListener("DOMContentLoaded", async function() {
+    try {
+        const response = await fetch('/profile'); // Assuming this endpoint returns the user's profile data
         if (response.ok) {
-          alert("Changes updated!");
-          window.location.href = "index.html";
+            const profileData = await response.json();
+            populateForm(profileData);
         } else {
-          const errorMessage = await response.text();
-          alert(errorMessage || "Failed to register. Please try again.");
+            console.error('Failed to fetch profile data:', response.statusText);
         }
-      } catch (error) {
-        console.error('Error:', error);
-        alert("Failed to register. Please try again.");
-      }
+    } catch (error) {
+        console.error('Error fetching profile data:', error);
     }
-  });
+});

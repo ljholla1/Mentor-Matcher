@@ -170,17 +170,32 @@ client.connect()
       }
     });
     
-    // New route handler to fetch all profiles
     app.get('/profiles', async (req, res) => {
       try {
-        const allProfiles = await profilesCollection.find().toArray();
-        res.json(allProfiles);
+        // Connect to the MongoDB server
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+    
+        // Connect to the database
+        const db = client.db(dbName);
+    
+        // Get the profiles collection
+        const profilesCollection = db.collection(profilesCollectionName);
+    
+        // Fetch all profiles from the collection
+        const profiles = await profilesCollection.find({}).toArray();
+    
+        // Close the connection
+        await client.close();
+    
+        // Send the profiles as JSON response
+        res.json(profiles);
       } catch (error) {
         console.error('Error fetching profiles:', error);
-        res.status(500).send('Internal server error');
+        res.status(500).send('Internal Server Error');
       }
     });
-
+    
     // New route handler to fetch detailed profile information for a specific user
     app.get('/profile/:userID', async (req, res) => {
       const userID = req.params.userID;
@@ -198,6 +213,7 @@ client.connect()
         res.status(500).send('Internal server error');
       }
     });
+
 
 
     app.listen(PORT, () => {
