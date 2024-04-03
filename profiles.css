@@ -169,6 +169,9 @@ nav a:hover {
   margin: auto;
   
 }
+#profile-bulb {
+  float:right;
+}
 
 .request-name {
   margin-left: 50px;
