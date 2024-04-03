@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid'); // Import uuid library
 const path = require('path');
+const multer = require('multer');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +24,26 @@ app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, 'public')));
 // Serve static files directly from their current directory
 app.use(express.static(__dirname));
+
+// Define storage for uploaded files
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/') // Choose the directory where files will be stored
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
+
+// Create multer instance
+// const upload = multer({ 
+//   storage: storage,
+//   limits: {
+//     fileSize: 1024 * 1024 * 5 // Limit file size to 5MB if needed
+//   }
+// });
+
+const upload = multer({ storage: storage });
 
 
 // Define route handlers
@@ -61,9 +83,17 @@ client.connect()
       
     // Registration route handler
 
-    app.post('/register', async (req, res) => {
+    app.post('/register', upload.single('profilePicture'), async (req, res) => {
+      
+      if (!req.file) {
+        return res.status(400).send('No file uploaded');
+      }
+      
       const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
     
+      // // Access profile picture file information using req.file
+      // const profilePicture = req.file;
+
       try {
         // Check if the username already exists in the database
         const existingUser = await usersCollection.findOne({ username: username });
@@ -115,7 +145,8 @@ client.connect()
             wednesdayCheckbox,
             thursdayCheckbox,
             fridayCheckbox,
-            weekendsCheckbox
+            weekendsCheckbox,
+            profilePicture: req.file.filename
           });
           
           console.log('User registered successfully');

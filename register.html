@@ -12,7 +12,7 @@
   <h1>Mentorship Matching Platform</h1>
   <div class="container">
     <h2>Account Information</h2>
-      <form id="registerForm" action="/register" method="POST">
+      <form id="registerForm" action="/register" method="POST" enctype="multipart/form-data">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" placeholder="Enter a username" maxlength="50">
         <br><br>
@@ -21,7 +21,7 @@
         <br><br>
     <h2>Create Your Profile</h2>
         <label for="profile_picture">Profile Picture:</label>
-        <input type="file" id="profile_picture" accept="image/*">
+        <input type="file" id="profile_picture" name="profilePicture" accept="image/*">
         <br><br>
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" maxlength="50">
@@ -142,59 +142,18 @@
       registerForm.addEventListener("submit", handleRegisterFormSubmission);
     }
 
-    // function handleRegisterFormSubmission(event) {
-    //   event.preventDefault();
 
-    //   const formData = new FormData(registerForm);
-
-    //   const credentials = {
-    //     // Extract profile information from the form data
-    //     username: formData.get("username"),
-    //     password: formData.get("password"),
-    //     first_name: formData.get("first_name"),
-    //     last_name: formData.get("last_name"),
-    //     role: formData.get("role"),
-    //     linkedin: formData.get("linkedin"),
-    //     user_type: formData.get("user_type"),
-    //     workstyle: formData.get("workstyle"),
-    //     strengths: [], // Array to hold selected strengths
-    //     weaknesses: formData.get("weaknesses"),
-    //     personality_traits: [], // Array to hold selected personality traits
-    //     questions: [ // Array to hold selected questions and answers
-    //       {
-    //         question: formData.get("questionSelection1"),
-    //         answer: formData.get("questions1")
-    //       },
-    //       {
-    //         question: formData.get("questionSelection2"),
-    //         answer: formData.get("questions2")
-    //       }
-    //     ],
-    //     availability: formData.get("availability"),
-    //     // Extract selected checkboxes for strengths
-    //     strengths: [
-    //       formData.get("python"),
-    //       formData.get("javascript"),
-    //       formData.get("html5"),
-    //       formData.get("css"),
-    //       formData.get("sql"),
-    //       formData.get("java")
-    //     ].filter(strength => strength !== null), // Filter out unchecked strengths
-    //     // Extract selected checkboxes for personality traits
-    //     personality_traits: [
-    //       formData.get("friendlyCheckbox"),
-    //       formData.get("formalCheckbox"),
-    //       formData.get("honestCheckbox")
-    //     ].filter(trait => trait !== null) // Filter out unchecked traits
-    //   };
-
-    //   registerUser(credentials);
-    // }
-
-    function handleRegisterFormSubmission(event) {
+  function handleRegisterFormSubmission(event) {
   event.preventDefault();
 
   const formData = new FormData(registerForm);
+  const profilePicture = document.getElementById("profile_picture").files[0]; // Get the uploaded file
+
+ // Check if a file was uploaded
+ if (profilePicture) {
+      formData.append("profilePicture", profilePicture); // Append the uploaded file to the FormData object
+    }
+
   const credentials = {
     username: formData.get("username"),
     password: formData.get("password"),
@@ -236,18 +195,19 @@
   if (formData.has("formalCheckbox")) credentials.personality_traits.push("formal");
   if (formData.has("honestCheckbox")) credentials.personality_traits.push("honest");
 
-  registerUser(credentials);
+  registerUser(credentials, formData);
 }
 
 
-    async function registerUser(credentials) {
+    async function registerUser(credentials, formData) {
       try {
         const response = await fetch('/register', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
+          // headers: {
+          //   'Content-Type': 'application/json'
+          // },
+          // body: JSON.stringify(credentials)
+          body: formData
         });
 
         if (response.ok) {
