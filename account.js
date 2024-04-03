@@ -80,8 +80,6 @@
 //     alert('Changes saved successfully!');
 // });
 
-
-
 const { MongoClient } = require('mongodb');
 
 // MongoDB connection URI
@@ -93,6 +91,58 @@ const dbName = 'name_generator'; // Update this with database name
 // Collection Names
 const profilesCollectionName = 'profiles'; // Update this with the profiles collection name
 const usersCollectionName = 'users'; // Update this with the users collection name
+
+// Function to save user profile data to MongoDB
+async function saveUserProfile(profileData) {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+
+        // Connect to the database
+        const db = client.db(dbName);
+
+        // Get the profiles collection
+        const profilesCollection = db.collection(profilesCollectionName);
+
+        // Update the profile data in the profiles collection
+        await profilesCollection.updateOne({ username: profileData.username }, { $set: profileData });
+        console.log(`Profile data updated for user: ${profileData.username}`);
+
+        // Get the users collection
+        const usersCollection = db.collection(usersCollectionName);
+
+        // Update the profile data in the users collection (if needed)
+        await usersCollection.updateOne({ username: profileData.username }, { $set: profileData });
+        console.log(`User data updated for user: ${profileData.username}`);
+    } catch (error) {
+        console.error('Error saving profile data:', error);
+    } finally {
+        // Close the connection
+        await client.close();
+    }
+}
+
+// Event listener for form submission
+document.getElementById('accountForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Extract form data
+    const formData = new FormData(this);
+
+    // Convert form data to JSON
+    const profileData = {};
+    formData.forEach((value, key) => {
+        profileData[key] = value;
+    });
+
+    // Save user profile data to MongoDB
+    await saveUserProfile(profileData);
+
+    // Show success message
+    alert('Changes saved successfully!');
+});
 
 // Function to save user profile data to MongoDB
 async function saveUserProfile(profileData) {
@@ -206,3 +256,5 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.error('Error fetching profile data:', error);
     }
 });
+
+
