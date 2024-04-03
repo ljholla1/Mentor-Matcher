@@ -35,13 +35,31 @@ nav a:hover {
   color: gray;
 }
 
+
 .popup {
   width: 400px;
   background: rgba(255, 255, 255, .50);
-  position: absolute;
+  position: fixed;
   margin: 20px auto;
   padding: 20px;
-  top: 0;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, 50%) scale(0.1);
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 9999;
+}
+
+.popup-profile {
+  width: 400px;
+  background: rgba(255, 255, 255, .50);
+  position: fixed;
+  margin: 20px auto;
+  padding: 20px;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, 50%) scale(0.1);
   text-align: center;
@@ -59,11 +77,13 @@ nav a:hover {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  flex-direction: column;
 }
 
 .user-info {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .user-info img {
@@ -73,18 +93,25 @@ nav a:hover {
   margin-right: 10px;
 }
 
+.request-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  width: 100%;
+}
+
 .request-buttons button {
   display: block;
   width: 100%;
   padding: 10px;
-  
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
   margin-top: 12px;
+  flex: 1;
 }
 
 .accept-btn {
@@ -110,6 +137,10 @@ nav a:hover {
   transition-duration: 500ms;
 }
 
+.opacity {
+  opacity: 0;
+}
+
 .btn {
   display: block;
   width: 100%;
@@ -122,6 +153,25 @@ nav a:hover {
   font-size: 16px;
   transition: background-color 0.3s ease;
   margin-top: 12px;
+}
+
+.profile-btn {
+  display: block;
+  width: fit-content;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: auto;
+  
+}
+
+.request-name {
+  margin-left: 50px;
 }
 
 .btn:hover {
@@ -206,6 +256,7 @@ form {
   width: 50%;
 }
 
+
 input,
 textarea {
   margin-bottom: .5em;
@@ -236,14 +287,13 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+
 #homehero-text {
-  text-align: center;
-  position: absolute;
-  top: 35%;
-  left: 40%;
-  transform: translate(-30%, -50%);
   color: #ADD8E6;
   font-family: 'Garamond', serif;
 }
