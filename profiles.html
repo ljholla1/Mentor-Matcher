@@ -314,6 +314,26 @@
           </a>
         `;
 
+         // Add click event listener to open the popup
+         profileCard.addEventListener('click', () => {
+              // Update the content of the popup
+              const popup = document.getElementById('popup-profile');
+              popup.innerHTML = `
+                <div class="video" data-tags="${profile.tags ? profile.tags.join(', ') : ''}">
+                  <div class="thumbnail">
+                    <img src="/path/to/profile/picture" alt="Profile Picture">
+                  </div>
+                  <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
+                  <p>${capitalize(profile.user_type)}</p>
+                  <!-- Add other profile data fields as needed -->
+                </div>
+                <button type="button" class="btn" onclick="closeProfile()">Back</button>
+              `;
+
+              // Open the popup
+              openProfile();
+            });
+
         // Append the profile card to the container
         profileContainer.appendChild(profileCard);
       });
