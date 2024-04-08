@@ -54,31 +54,69 @@ checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', filterProducts);
 });
 
+
 function filterProducts() {
   const searchTerm = searchInput.value.toLowerCase().trim();
   const selectedTags = [...checkboxes].filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
 
   const products = document.querySelectorAll('.video');
   products.forEach(product => {
-    const productName = product.querySelector('h2').innerText.toLowerCase().trim();
-    const productTags = product.dataset.tags.split(',').map(tag => tag.trim());
+    const titleElement = product.querySelector('.videoTitle');
+    const tagsElements = product.querySelectorAll('.tags .tag'); // Update this line to target the tags within the .tags container
 
-    // Check if product name matches search term
-    const matchesSearch = !searchTerm || productName.includes(searchTerm);
+    if (titleElement && tagsElements.length > 0) {
+      const productName = titleElement.innerText.toLowerCase().trim();
+      const productTags = Array.from(tagsElements).map(tag => tag.innerText.toLowerCase().trim());
 
-    // Check if at least one selected tag matches any of the product tags
-    const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => productTags.includes(tag));
+      // Check if product name matches search term
+      const matchesSearch = !searchTerm || productName.includes(searchTerm);
 
-    console.log(`Product: ${productName}, Matches Search: ${matchesSearch}, Matches Tags: ${matchesTags}`);
+      // Check if at least one selected tag matches any of the product tags
+      const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => productTags.includes(tag));
 
-    // Show or hide product based on filter criteria
-    if (matchesSearch && matchesTags) {
-      product.style.display = 'block';
+      console.log(`Product: ${productName}, Matches Search: ${matchesSearch}, Matches Tags: ${matchesTags}`);
+
+      // Show or hide product based on filter criteria
+      if (matchesSearch && matchesTags) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
     } else {
-      product.style.display = 'none';
+      console.error('Title or tags not found in product:', product);
     }
   });
 }
+
+
+
+
+
+// function filterProducts() {
+//   const searchTerm = searchInput.value.toLowerCase().trim();
+//   const selectedTags = [...checkboxes].filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+
+//   const products = document.querySelectorAll('.video');
+//   products.forEach(product => {
+//     const productName = product.querySelector('h2').innerText.toLowerCase().trim();
+//     const productTags = product.dataset.tags.split(',').map(tag => tag.trim());
+
+//     // Check if product name matches search term
+//     const matchesSearch = !searchTerm || productName.includes(searchTerm);
+
+//     // Check if at least one selected tag matches any of the product tags
+//     const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => productTags.includes(tag));
+
+//     console.log(`Product: ${productName}, Matches Search: ${matchesSearch}, Matches Tags: ${matchesTags}`);
+
+//     // Show or hide product based on filter criteria
+//     if (matchesSearch && matchesTags) {
+//       product.style.display = 'block';
+//     } else {
+//       product.style.display = 'none';
+//     }
+//   });
+// }
 
 
 
