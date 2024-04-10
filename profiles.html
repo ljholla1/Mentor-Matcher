@@ -19,7 +19,7 @@
   <div class="popup" id="popup">
     <div class="request">
         <div class="user-info">
-          <img src="profile_picutre.png" alt="Profile Picture">
+          <!-- <img src="profile_picutre.png" alt="Profile Picture"> -->
           <h3>Username</h3>
           <button class="profile-btn" id="profile-bulb" onclick="viewProfile()">View Profile</button>
         </div>
@@ -31,7 +31,7 @@
 
     <div class="request">
       <div class="user-info">
-        <img src="profile_picutre.png" alt="Profile Picture">
+        <!-- <img src="profile_picutre.png" alt="Profile Picture"> -->
         <h3>Username</h3>
         <button class="profile-btn" onclick="viewProfile()">View Profile</button>
       </div>
@@ -294,9 +294,9 @@
         // Customize the profile card based on profile data
         profileCard.innerHTML = `
           <a href="javascript:void(0)" onclick="openProfile()">
-          <div class="thumbnail">
+            <!-- <div class="thumbnail">
             <img src="/path/to/profile/picture" alt="Profile Picture">
-          </div>
+          </div> -->
           <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
           <p>${capitalize(profile.user_type)}</p>
           <div class="tags">
@@ -320,9 +320,9 @@
               const popup = document.getElementById('popup-profile');
               popup.innerHTML = `
                 <div class="video" data-tags="${profile.tags ? profile.tags.join(', ') : ''}">
-                  <div class="thumbnail">
+                  <!-- <div class="thumbnail">
                     <img src="/path/to/profile/picture" alt="Profile Picture">
-                  </div>
+                  </div> -->
                   <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
                   <p>${capitalize(profile.user_type)}</p>
                   <!-- Add other profile data fields as needed -->

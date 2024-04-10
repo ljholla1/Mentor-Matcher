@@ -10,7 +10,7 @@
     <h1>Mentorship Matching Platform</h1>
     <div class="container">
     <h2>Edit Account Information</h2>
-      <form id="accountForm">
+      <form id="accountForm" action="/update-profile" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" placeholder="Edit username">
         <br><br>
@@ -18,9 +18,9 @@
         <input type="password" id="password" name="password" placeholder="Edit a password">
         <br><br>
         <h2>Edit Your Profile</h2>
-        <label for="profile_picture">Profile Picture:</label>
+        <!-- <label for="profile_picture">Profile Picture:</label>
         <input type="file" id="profile_picture" accept="image/*">
-        <br><br>
+        <br><br> -->
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" placeholder="Edit your first name">
         <br><br>
