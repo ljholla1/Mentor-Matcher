@@ -65,72 +65,140 @@ client.connect()
       });
 
     // Registration route handler
-    app.post('/register', upload.single('profilePicture'), async (req, res) => {
-      if (!req.file) {
-        return res.status(400).send('No file uploaded');
-      }
+    // app.post('/register', upload.single('profilePicture'), async (req, res) => {
+    //   if (!req.file) {
+    //     return res.status(400).send('No file uploaded');
+    //   }
       
-      const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
+    //   const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
 
-      try {
-        const existingUser = await usersCollection.findOne({ username: username });
-        if (existingUser) {
-          return res.status(400).send('Username already exists. Please choose a different username.');
-        }
+    //   try {
+    //     const existingUser = await usersCollection.findOne({ username: username });
+    //     if (existingUser) {
+    //       return res.status(400).send('Username already exists. Please choose a different username.');
+    //     }
     
-        let userID = uuidv4();
-        let userWithSameIDExists = await usersCollection.findOne({ userID });
-        while (userWithSameIDExists) {
-          userID = uuidv4();
-          userWithSameIDExists = await usersCollection.findOne({ userID });
-        }
+    //     let userID = uuidv4();
+    //     let userWithSameIDExists = await usersCollection.findOne({ userID });
+    //     while (userWithSameIDExists) {
+    //       userID = uuidv4();
+    //       userWithSameIDExists = await usersCollection.findOne({ userID });
+    //     }
     
-        try {
-          await usersCollection.insertOne({ 
-            userID, 
-            username, 
-            password
-          });
+    //     try {
+    //       await usersCollection.insertOne({ 
+    //         userID, 
+    //         username, 
+    //         password
+    //       });
     
-          await profilesCollection.insertOne({
-            userID,
-            first_name,
-            last_name,
-            role,
-            linkedin,
-            user_type,
-            workstyle,
-            strengths,
-            weaknesses,
-            personality_traits,
-            questionSelection1,
-            questions1,
-            questionSelection2,
-            questions2,
-            availability,
-            zoom,
-            office,
-            nonoffice,
-            mondayCheckbox,
-            tuesdayCheckbox,
-            wednesdayCheckbox,
-            thursdayCheckbox,
-            fridayCheckbox,
-            weekendsCheckbox,
-            profilePicture: req.file.filename
-          });
+    //       await profilesCollection.insertOne({
+    //         userID,
+    //         first_name,
+    //         last_name,
+    //         role,
+    //         linkedin,
+    //         user_type,
+    //         workstyle,
+    //         strengths,
+    //         weaknesses,
+    //         personality_traits,
+    //         questionSelection1,
+    //         questions1,
+    //         questionSelection2,
+    //         questions2,
+    //         availability,
+    //         zoom,
+    //         office,
+    //         nonoffice,
+    //         mondayCheckbox,
+    //         tuesdayCheckbox,
+    //         wednesdayCheckbox,
+    //         thursdayCheckbox,
+    //         fridayCheckbox,
+    //         weekendsCheckbox,
+    //         profilePicture: req.file.filename
+    //       });
           
-          console.log('User registered successfully');
-          res.sendStatus(200);
-        } catch (error) {
-          console.error('Error registering user:', error);
-          res.status(500).send('Failed to register user');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal server error');
-      }
-    });
+    //       console.log('User registered successfully');
+    //       res.sendStatus(200);
+    //     } catch (error) {
+    //       console.error('Error registering user:', error);
+    //       res.status(500).send('Failed to register user');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error:', error);
+    //     res.status(500).send('Internal server error');
+    //   }
+    // });
+
+app.post('/register', upload.single('profilePicture'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded');
+  }
+  
+  const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
+
+  try {
+    const existingUser = await usersCollection.findOne({ username: username });
+    if (existingUser) {
+      return res.status(400).send('Username already exists. Please choose a different username.');
+    }
+
+    let userID = uuidv4();
+    let userWithSameIDExists = await usersCollection.findOne({ userID });
+    while (userWithSameIDExists) {
+      userID = uuidv4();
+      userWithSameIDExists = await usersCollection.findOne({ userID });
+    }
+
+    try {
+      await usersCollection.insertOne({ 
+        userID, 
+        username, 
+        password
+      });
+
+      await profilesCollection.insertOne({
+        userID,
+        first_name,
+        last_name,
+        user_type,     
+        linkedin,
+        role,
+        user_type,
+        workstyle,
+        strengths,
+        weaknesses,
+        personality_traits,
+        questionSelection1,
+        questions1,
+        questionSelection2,
+        questions2,
+        availability,
+        zoom,
+        office,
+        nonoffice,
+        mondayCheckbox,
+        tuesdayCheckbox,
+        wednesdayCheckbox,
+        thursdayCheckbox,
+        fridayCheckbox,
+        weekendsCheckbox,
+      });
+      
+      console.log('User registered successfully');
+      res.sendStatus(200);
+    } catch (error) {
+      console.error('Error registering user:', error);
+      res.status(500).send('Failed to register user');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
 
     // Login route handler
     app.post('/login', async (req, res) => {
@@ -203,15 +271,29 @@ client.connect()
     });
 
     // Route handler to fetch all profiles
-    app.get('/profiles', async (req, res) => {
-      try {
-        const profiles = await profilesCollection.find({}).toArray();
-        res.json(profiles);
-      } catch (error) {
-        console.error('Error fetching profiles:', error);
-        res.status(500).send('Internal Server Error');
-      }
-    });
+    // app.get('/profiles', async (req, res) => {
+    //   try {
+    //     const profiles = await profilesCollection.find({}).toArray();
+    //     res.json(profiles);
+    //   } catch (error) {
+    //     console.error('Error fetching profiles:', error);
+    //     res.status(500).send('Internal Server Error');
+    //   }
+    // });
+
+
+    // Route handler to fetch all profiles and store them in an array
+app.get('/profiles', async (req, res) => {
+  try {
+    const profiles = await profilesCollection.find({}).toArray();
+    res.locals.profiles = profiles; // Store profiles in res.locals
+    res.json(profiles);
+  } catch (error) {
+    console.error('Error fetching profiles:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
