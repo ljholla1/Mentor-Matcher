@@ -166,6 +166,28 @@ client.connect()
       }
     });
 
+    // Update profile route handler
+app.post('/update-profile', async (req, res) => {
+  const { userID, profileData } = req.body;
+
+  try {
+    // Update profile data in the profiles collection
+    const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
+
+    if (result.modifiedCount === 1) {
+      console.log('Profile data updated successfully');
+      res.sendStatus(200);
+    } else {
+      console.error('Failed to update profile data');
+      res.status(500).send('Failed to update profile data');
+    }
+  } catch (error) {
+    console.error('Error updating profile data:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+
     // Define the route handler to fetch a detailed profile information for a specific user
     app.get('/profile/:userID', async (req, res) => {
       const userID = req.params.userID;

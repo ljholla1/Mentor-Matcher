@@ -310,9 +310,13 @@ document.getElementById('accountForm').addEventListener('submit', async function
 
     // Convert form data to JSON
     const profileData = {};
-    formData.forEach((value, key) => {
-        profileData[key] = value;
-    });
+    for (const [key, value] of formData.entries()) {
+        if (key.endsWith('Checkbox')) { // Handle checkbox inputs
+            profileData[key] = formData.has(key); // Set checkbox values based on whether they are checked
+        } else {
+            profileData[key] = value;
+        }
+    }
 
     // Save user profile data to MongoDB
     await saveUserProfile(profileData);
@@ -320,6 +324,7 @@ document.getElementById('accountForm').addEventListener('submit', async function
     // Show success message
     alert('Changes saved successfully!');
 });
+
 
 // Function to populate form fields with profile data
 function populateForm(profileData) {
