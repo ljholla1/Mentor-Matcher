@@ -451,7 +451,10 @@ a {
     display: inline;
     float: right;
   }
-
+  
+  nav ul li.accounts-btn {
+    float: left; /* Push the "Accounts" button to the left */
+  }
   nav ul a {
     display: block;
     padding: 20px 14px;
