@@ -63,15 +63,18 @@ function filterProducts() {
 
   profiles.forEach(profile => {
     // Get profile information
-    const { first_name, last_name, role, strengths, weaknesses } = profile;
+    const { first_name, last_name, role, strengths, weaknesses, user_type } = profile;
 
     // Check if profile matches search term and selected tags
     const matchesSearch = !searchTerm || (first_name.toLowerCase().includes(searchTerm) || last_name.toLowerCase().includes(searchTerm));
     const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => strengths.includes(tag) || weaknesses.includes(tag));
 
+    const matchesUserType = selectedUserTypes.length === 0 || selectedUserTypes.includes(user_type);
+
+
     // Display profile information if it matches search term and selected tags
     if (matchesSearch && matchesTags) {
-      console.log(`Profile: ${first_name} ${last_name}, Role: ${role}, Strengths: ${strengths.join(', ')}, Weaknesses: ${weaknesses.join(', ')}`);
+      console.log(`Profile: ${first_name} ${last_name}, Role: ${role}, Strengths: ${strengths.join(', ')}, Weaknesses: ${weaknesses.join(', ')}, User Type: ${user_type}`);
     }
   });
 }
