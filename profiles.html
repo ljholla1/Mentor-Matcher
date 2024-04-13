@@ -19,7 +19,7 @@
   <div class="popup" id="popup">
     <div class="request">
         <div class="user-info">
-          <!-- <img src="profile_picutre.png" alt="Profile Picture"> -->
+          <img src="profile_picutre.png" alt="Profile Picture">
           <h3>Username</h3>
           <button class="profile-btn" id="profile-bulb" onclick="viewProfile()">View Profile</button>
         </div>
@@ -31,7 +31,7 @@
 
     <div class="request">
       <div class="user-info">
-        <!-- <img src="profile_picutre.png" alt="Profile Picture"> -->
+        <img src="profile_picutre.png" alt="Profile Picture">
         <h3>Username</h3>
         <button class="profile-btn" onclick="viewProfile()">View Profile</button>
       </div>
@@ -39,7 +39,7 @@
         <button class="accept-btn" onclick="acceptRequest()">Accept</button>
         <button class="deny-btn" onclick="denyRequest()">Deny</button>
       </div>
-    </div>
+    </div> 
 
     <button type="button" class="btn" onclick="closePopup()">Back</button>
   </div>
@@ -223,15 +223,42 @@
   <script src="script.js"></script>
   <script src="https://kit.fontawesome.com/cae0f22046.js" crossorigin="anonymous"></script>
   <script>
+    const sendRequestBtn = document.getElementById("sendRequestBtn");
+
+function sendRequest() {
+  const recipientUserID = sendRequestBtn.dataset.recipientUserID;
+  console.log('recipientUserID:', recipientUserID);
+  // Send an AJAX request to the server
+  fetch('/send-request', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ recipientUserID: sendRequestBtn.dataset.recipientUserID }),
+
+  })
+    .then(response => {
+      if (response.ok) {
+        // Handle the successful response (e.g., display a success message)
+        console.log('Request sent successfully');
+      } else {
+        // Handle the error response
+        console.error('Failed to send request');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
 
     // Pop Up Handlers-------------------------------------------------------------------------------------------------------------------------------------
     let profile = document.getElementById("popup-profile")
-    const sendRequestBtn = document.getElementById("sendRequestBtn");
     let isActive = false;
 
-    function openProfile() {
+    function openProfile(recipientUserID) {
       profile.classList.add("open-popup");
       document.getElementById("wrapper").classList.add("popup-opened");
+      sendRequestBtn.dataset.recipientUserID = recipientUserID;
     }
     function closeProfile() {
       if (!isActive) {
@@ -250,12 +277,43 @@
     let popup = document.getElementById("popup");
 
     function openPopup() {
-      isActive = true;
-      popup.classList.add("open-popup");
-      document.getElementById("wrapper").classList.add("popup-opened");
-      sendRequestBtn.style.display = "none";
-      console.log('this is now true')
-    }
+  isActive = true;
+  popup.classList.add('open-popup');
+  document.getElementById('wrapper').classList.add('popup-opened');
+  sendRequestBtn.style.display = 'none';
+  console.log('this is now true');
+
+  // Fetch the list of friend requests for the logged-in user from the server
+  fetch('/get-friend-requests')
+    .then((response) => response.json())
+    .then((requests) => {
+      // Clear the existing requests in the popup
+      popup.innerHTML = '';
+
+      // Populate the popup with the list of friend requests
+      requests.forEach((request) => {
+        const requestElement = document.createElement('div');
+        
+        requestElement.classList.add('video');
+        requestElement.innerHTML = `
+          <div class="request">
+            <div class="user-info">
+              <h3>${request.senderUsername}</h3>
+              <button class="profile-btn" onclick="viewProfile('${request.senderUserID}')">View Profile</button>
+            </div>
+            <div class="request-buttons">
+              <button class="accept-btn" onclick="acceptRequest('${request.requestID}')">Accept</button>
+              <button class="deny-btn" onclick="denyRequest('${request.requestID}')">Deny</button>
+            </div>
+          </div>
+        `;
+        popup.appendChild(requestElement);
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching friend requests:', error);
+    });
+}
     function closePopup() {
       isActive = false;
       popup.classList.remove("open-popup");
@@ -317,9 +375,10 @@
          // Add click event listener to open the popup
          profileCard.addEventListener('click', () => {
               // Update the content of the popup
+              const recipientUserID = profile.userID;
               const popup = document.getElementById('popup-profile');
               popup.innerHTML = `
-                <div class="video" data-tags="${profile.tags ? profile.tags.join(', ') : ''}">
+                <div class="video" data-tags="${profile.tags ? profile.tags.join(', ') : ''}" data-userid="${profile.userID}">
                   <!-- <div class="thumbnail">
                     <img src="/path/to/profile/picture" alt="Profile Picture">
                   </div> -->
@@ -335,12 +394,12 @@
                   <p><strong>Question 2:</strong> ${profile.questions2}</p>
                   <p><strong>Availability:</strong> ${profile.availability}</p>
                 </div>
-                <button type="button" class="btn" id="sendRequestBtn" onclick="sendRequest()">Send Request</button>
+                <button type="button" class="btn" id="sendRequestBtn"  onclick="sendRequest()">Send Request</button>
                 <button type="button" class="btn" onclick="closeProfile()">Back</button>
               `;
 
               // Open the popup
-              openProfile();
+              openProfile(recipientUserID);
             });
 
         // Append the profile card to the container

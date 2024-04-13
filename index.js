@@ -218,7 +218,9 @@ app.post('/register', upload.single('profilePicture'), async (req, res) => {
         if (user) {
           if (user.password === password) {
             console.log('Login successful for user:', username);
+            global.loggedInUserID = user.userID;
             const userProfile = await profilesCollection.findOne({ userID: user.userID });
+        
             res.redirect('/profiles.html');
           } else {
             console.log('Invalid password for user:', username);
@@ -289,6 +291,62 @@ app.post('/update-profile', async (req, res) => {
       } catch (error) {
         console.error('Error fetching profile:', error);
         res.status(500).send('Internal server error');
+      }
+    });
+
+    app.post('/send-request', async (req, res) => {
+      const { recipientUserID } = req.body;
+      console.log('recipientUserID received:', recipientUserID);
+    
+      try {
+        // Get the logged-in user's userID from the session or global variable
+        const loggedInUserID = global.loggedInUserID;
+    
+        // Store the friend request data in a suitable data structure or database collection
+        const requestData = {
+          senderUserID: loggedInUserID,
+          recipientUserID,
+          timestamp: new Date(),
+          // Add any additional data you need to store for the request
+        };
+    
+        // Example: Store the request data in a new collection called 'friendRequests'
+        const friendRequestsCollection = db.collection('requests');
+        await friendRequestsCollection.insertOne(requestData);
+    
+        res.sendStatus(200);
+      } catch (error) {
+        console.error('Error sending friend request:', error);
+        res.status(500).send('Internal Server Error');
+      }
+    });
+
+
+    app.get('/get-friend-requests', async (req, res) => {
+      try {
+        // Get the logged-in user's userID from the session or global variable
+        const loggedInUserID = global.loggedInUserID;
+    
+        // Query the database for friend requests received by the logged-in user
+        const friendRequestsCollection = db.collection('requests');
+        const friendRequests = await friendRequestsCollection
+          .find({ recipientUserID: loggedInUserID })
+          .toArray();
+    
+        // Fetch the sender's profile data for each request
+        const requestsWithSenderProfiles = await Promise.all(
+          friendRequests.map(async (request) => {
+            const senderProfile = await profilesCollection.findOne({
+              userID: request.senderUserID,
+            });
+            return { ...request, senderUsername: senderProfile.first_name + ' ' + senderProfile.last_name };
+          })
+        );
+    
+        res.json(requestsWithSenderProfiles);
+      } catch (error) {
+        console.error('Error fetching friend requests:', error);
+        res.status(500).send('Internal Server Error');
       }
     });
 
