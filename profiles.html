@@ -325,7 +325,15 @@
                   </div> -->
                   <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
                   <p>${capitalize(profile.user_type)}</p>
-                  <!-- Add other profile data fields as needed -->
+                  <p><strong>Role:</strong> ${profile.role}</p>
+                  <p><strong>LinkedIn:</strong> <a href="${profile.linkedin}" target="_blank">${profile.linkedin}</a></p>
+                  <p><strong>Work Style:</strong> ${profile.workstyle}</p>
+                  <p><strong>Strengths:</strong> ${profile.strengths.join(', ')}</p>
+                  <p><strong>Weaknesses:</strong> ${profile.weaknesses}</p>
+                  <p><strong>Personality Traits:</strong> ${profile.personality_traits.join(', ')}</p>
+                  <p><strong>Question 1:</strong> ${profile.questions1}</p>
+                  <p><strong>Question 2:</strong> ${profile.questions2}</p>
+                  <p><strong>Availability:</strong> ${profile.availability}</p>
                 </div>
                 <button type="button" class="btn" id="sendRequestBtn" onclick="sendRequest()">Send Request</button>
                 <button type="button" class="btn" onclick="closeProfile()">Back</button>
