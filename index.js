@@ -383,7 +383,6 @@ app.post('/register', async (req, res) => {
 app.get('/profiles', async (req, res) => {
   try {
     const profiles = await profilesCollection.find({}).toArray();
-    // res.locals.profiles = profiles; // Store profiles in res.locals
     res.json(profiles);
   } catch (error) {
     console.error('Error fetching profiles:', error);
