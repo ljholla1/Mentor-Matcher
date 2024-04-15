@@ -19,18 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// Define storage for uploaded files
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads/') // Choose the directory where files will be stored
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname)
-//   }
-// });
-
-// const upload = multer({ storage: storage });
-
 // Define route handlers
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'register.html'));
@@ -135,24 +123,24 @@ client.connect()
     // });
 
 
-    const express = require('express');
-    const session = require('express-session');
+    // const express = require('express');
+    // const session = require('express-session');
     
-    const app = express();
+    // const app = express();
     
-    // Configure session middleware
-    app.use(session({
-      secret: 'your_secret_key_here', // Replace with a strong, random secret key
-      resave: false,
-      saveUninitialized: true,
-      cookie: { secure: false } // Set to true for https connections only
-    }));
+    // // Configure session middleware
+    // app.use(session({
+    //   secret: 'your_secret_key_here', // Replace with a strong, random secret key
+    //   resave: false,
+    //   saveUninitialized: true,
+    //   cookie: { secure: false } // Set to true for https connections only
+    // }));
     
     // ... rest of your code (routes, middleware, etc.)
     
-    app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
-    });
+    // app.listen(PORT, () => {
+    //   console.log(`Server listening on port ${PORT}`);
+    // });
     
 
 app.post('/register', async (req, res) => {
