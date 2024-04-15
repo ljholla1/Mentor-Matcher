@@ -320,6 +320,8 @@ document.getElementById('accountForm').addEventListener('submit', async function
         }
     }
 
+    profileData.userID = document.getElementById('userID').value;
+
     // Save user profile data to MongoDB
     await saveUserProfile(profileData);
 
