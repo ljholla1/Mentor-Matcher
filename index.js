@@ -134,6 +134,27 @@ client.connect()
     //   }
     // });
 
+
+    const express = require('express');
+    const session = require('express-session');
+    
+    const app = express();
+    
+    // Configure session middleware
+    app.use(session({
+      secret: 'your_secret_key_here', // Replace with a strong, random secret key
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: false } // Set to true for https connections only
+    }));
+    
+    // ... rest of your code (routes, middleware, etc.)
+    
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
+    
+
 app.post('/register', async (req, res) => {
   
   const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
@@ -234,7 +255,7 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Internal server error');
       }
     });
-
+    
     // Update profile route handler
 app.post('/update-profile', async (req, res) => {
   const { userID, profileData } = req.body;

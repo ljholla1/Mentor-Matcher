@@ -270,37 +270,39 @@ const profilesCollectionName = 'profiles'; // Update this with the profiles coll
 const usersCollectionName = 'users'; // Update this with the users collection name
 
 // Function to save user profile data to MongoDB
-async function saveUserProfile(profileData) {
-    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    try {
-        // Connect to the MongoDB server
-        await client.connect();
-
-        // Connect to the database
-        const db = client.db(dbName);
-
-        // Get the profiles collection
-        const profilesCollection = db.collection(profilesCollectionName);
-
-        // Update the profile data in the profiles collection
-        await profilesCollection.updateOne({ username: profileData.username }, { $set: profileData });
-        console.log(`Profile data updated for user: ${profileData.username}`);
-
-        // Get the users collection
-        const usersCollection = db.collection(usersCollectionName);
-
-        // Update the profile data in the users collection (if needed)
-        await usersCollection.updateOne({ username: profileData.username }, { $set: profileData });
-        console.log(`User data updated for user: ${profileData.username}`);
-    } catch (error) {
-        console.error('Error saving profile data:', error);
-    } finally {
-        // Close the connection
-        await client.close();
+async function saveUserProfile(req, res) {
+    const profileData = req.body;
+  
+    // Check if user is logged in (session exists)
+    if (!req.session || !req.session.userID) {
+      return res.status(401).send('Unauthorized'); // User not logged in
     }
-}
-
+  
+    const userID = req.session.userID;
+    profileData.userID = userID;
+  
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  
+    try {
+      await client.connect();
+      const db = client.db(dbName);
+  
+      const profilesCollection = db.collection(profilesCollectionName);
+      await profilesCollection.updateOne({ userID: userID }, { $set: profileData });
+      console.log(`Profile data updated for user: ${profileData.username}`);
+  
+      // Update users collection if needed (assuming same structure)
+      const usersCollection = db.collection(usersCollectionName);
+      await usersCollection.updateOne({ userID: userID }, { $set: profileData });
+      console.log(`User data updated for user: ${profileData.username}`);
+    } catch (error) {
+      console.error('Error saving profile data:', error);
+    } finally {
+      await client.close();
+    }
+  }
+  
 // Event listener for form submission
 document.getElementById('accountForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
