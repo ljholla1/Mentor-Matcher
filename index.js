@@ -150,8 +150,8 @@ client.connect()
     
     // ... rest of your code (routes, middleware, etc.)
     
-    app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
     });
     
 
