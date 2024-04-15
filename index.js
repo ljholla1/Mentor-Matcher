@@ -54,73 +54,6 @@ client.connect()
         console.error('Error creating index for profilesCollection:', err);
       });
 
-    // Registration route handler
-    // app.post('/register', upload.single('profilePicture'), async (req, res) => {
-    //   if (!req.file) {
-    //     return res.status(400).send('No file uploaded');
-    //   }
-      
-    //   const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
-
-    //   try {
-    //     const existingUser = await usersCollection.findOne({ username: username });
-    //     if (existingUser) {
-    //       return res.status(400).send('Username already exists. Please choose a different username.');
-    //     }
-    
-    //     let userID = uuidv4();
-    //     let userWithSameIDExists = await usersCollection.findOne({ userID });
-    //     while (userWithSameIDExists) {
-    //       userID = uuidv4();
-    //       userWithSameIDExists = await usersCollection.findOne({ userID });
-    //     }
-    
-    //     try {
-    //       await usersCollection.insertOne({ 
-    //         userID, 
-    //         username, 
-    //         password
-    //       });
-    
-    //       await profilesCollection.insertOne({
-    //         userID,
-    //         first_name,
-    //         last_name,
-    //         role,
-    //         linkedin,
-    //         user_type,
-    //         workstyle,
-    //         strengths,
-    //         weaknesses,
-    //         personality_traits,
-    //         questionSelection1,
-    //         questions1,
-    //         questionSelection2,
-    //         questions2,
-    //         availability,
-    //         zoom,
-    //         office,
-    //         nonoffice,
-    //         mondayCheckbox,
-    //         tuesdayCheckbox,
-    //         wednesdayCheckbox,
-    //         thursdayCheckbox,
-    //         fridayCheckbox,
-    //         weekendsCheckbox,
-    //         profilePicture: req.file.filename
-    //       });
-          
-    //       console.log('User registered successfully');
-    //       res.sendStatus(200);
-    //     } catch (error) {
-    //       console.error('Error registering user:', error);
-    //       res.status(500).send('Failed to register user');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error:', error);
-    //     res.status(500).send('Internal server error');
-    //   }
-    // });
 
 
     // const express = require('express');
@@ -244,34 +177,28 @@ app.post('/register', async (req, res) => {
       }
     });
     
-    app.post('/update-profile', async (req, res) => {
-      const { userID, ...profileData } = req.body;
-  
-      try {
-          // Check for existing profile with the userID
-          const existingProfile = await profilesCollection.findOne({ userID });
-  
-          if (existingProfile) {
-              // Update profile data in the profiles collection if document exists
-              const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
-  
-              if (result.modifiedCount === 1) {
-                  console.log('Profile data updated successfully');
-                  res.sendStatus(200);
-              } else {
-                  console.error('No changes detected during update');
-                  res.sendStatus(200); // Or another appropriate status code (e.g., 304 Not Modified)
-              }
-          } else {
-              console.error('Profile with userID not found');
-              res.status(404).send('Profile not found');
-          }
-      } catch (error) {
-          console.error('Error updating profile data:', error);
-          res.status(500).send('Internal Server Error');
-      }
-  });
-    
+    // Update profile route handler
+app.post('/update-profile', async (req, res) => {
+  const { userID, profileData } = req.body;
+
+  try {
+    // Update profile data in the profiles collection
+    const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
+
+    if (result.modifiedCount === 1) {
+      console.log('Profile data updated successfully');
+      res.sendStatus(200);
+    } else {
+      console.error('Failed to update profile data');
+      res.status(500).send('Failed to update profile data');
+    }
+  } catch (error) {
+    console.error('Error updating profile data:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+
     // Define the route handler to fetch a detailed profile information for a specific user
     app.get('/profile/:userID', async (req, res) => {
       const userID = req.params.userID;
@@ -380,6 +307,7 @@ app.post('/register', async (req, res) => {
 app.get('/profiles', async (req, res) => {
   try {
     const profiles = await profilesCollection.find({}).toArray();
+    // res.locals.profiles = profiles; // Store profiles in res.locals
     res.json(profiles);
   } catch (error) {
     console.error('Error fetching profiles:', error);
