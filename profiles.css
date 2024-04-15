@@ -57,15 +57,14 @@ nav a:hover {
   justify-content: center;
 }
 
+
 .popup-profile {
   width: 400px;
   background: rgba(255, 255, 255, 0.7);
-  position: fixed;
-  margin: 20px auto;
-  padding: 20px;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, 50%) scale(0.1);
+  position: absolute; /* Change from 'fixed' to 'absolute' */
+  top: 50%; /* Vertical centering */
+  left: 50%; /* Horizontal centering */
+  transform: translate(-50%, -50%) scale(0.1); /* Initial scale and positioning */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   visibility: hidden;
@@ -74,6 +73,9 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 80vh; /* Set a maximum height for scrolling */
+  padding: 20px; /* Add padding */
+
 }
 
 .profile-details {
