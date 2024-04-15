@@ -254,10 +254,12 @@ app.post('/register', async (req, res) => {
           if (existingProfile) {
               // Update profile data in the profiles collection if document exists
               const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
+              alert('Changes saved successfully!');
   
               if (result.modifiedCount === 1) {
                   console.log('Profile data updated successfully');
                   res.sendStatus(200);
+                  alert('Changes saved successfully!');
               } else {
                   console.error('No changes detected during update');
                   res.sendStatus(200); // Or another appropriate status code (e.g., 304 Not Modified)

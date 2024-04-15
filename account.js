@@ -295,6 +295,7 @@ async function saveUserProfile(req, res) {
       // Update users collection if needed (assuming same structure)
       const usersCollection = db.collection(usersCollectionName);
       await usersCollection.updateOne({ userID: userID }, { $set: profileData });
+      alert('Changes saved successfully!');
       console.log(`User data updated for user: ${profileData.username}`);
     } catch (error) {
       console.error('Error saving profile data:', error);
@@ -383,6 +384,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         if (response.ok) {
             const profileData = await response.json();
             populateForm(profileData);
+            alert('Changes saved successfully!');
         } else {
             console.error('Failed to fetch profile data:', response.statusText);
         }
