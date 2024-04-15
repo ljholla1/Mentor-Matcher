@@ -61,7 +61,7 @@ nav a:hover {
 .popup-profile {
   width: 400px;
   background: rgba(255, 255, 255, 0.7);
-  position: absolute; /* Change from 'fixed' to 'absolute' */
+  position: fixed; /* Change from 'fixed' to 'absolute' */
   top: 50%; /* Vertical centering */
   left: 50%; /* Horizontal centering */
   transform: translate(-50%, -50%) scale(0.1); /* Initial scale and positioning */
@@ -73,8 +73,9 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  max-height: 80vh;
   padding: 20px; /* Add padding */
+  overflow-y: auto;
 
 }
 
@@ -105,40 +106,6 @@ nav a:hover {
   width: 100%;
   text-align: center;
   line-height: 1.2;
-}
-
-.popup-profile .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding-bottom: 10px;
-}
-
-.popup-profile .content .detail-item {
-  width: 90%;
-  margin-bottom: 5px;
-}
-
-.popup-profile .content .detail-title {
-  font-size: 14px;
-  margin-bottom: 2px;
-}
-
-.popup-profile .content .detail-value {
-  font-size: 12px;
-  padding: 4px 6px;
-  border-radius: 10px;
-}
-
-.popup-profile .content h2.videoTitle {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.popup-profile .content p.mentor-mentee {
-  font-size: 14px;
-  margin-bottom: 10px;
 }
 
 .request {

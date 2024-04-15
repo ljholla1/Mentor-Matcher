@@ -258,6 +258,7 @@ function sendRequest() {
 
     function openProfile(recipientUserID) {
       profile.classList.add("open-popup");
+      profile.scrollTop = 0;
       document.getElementById("wrapper").classList.add("popup-opened");
       sendRequestBtn.dataset.recipientUserID = recipientUserID;
     }
@@ -329,7 +330,7 @@ function sendRequest() {
       document.getElementById("wrapper").classList.add("popup-opened");
     }
 
-
+  
 
     // Adding Profiles onto page-------------------------------------------------------------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function () {
