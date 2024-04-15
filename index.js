@@ -395,11 +395,11 @@ app.get('/profiles', async (req, res) => {
 });
 
 
-  //   app.listen(PORT, () => {
-  //     console.log(`Server is running on port ${PORT}`);
-  //   });
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
 
-  // })
-  // .catch((err) => {
-  //   console.error('Error connecting to MongoDB:', err);
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
   });
