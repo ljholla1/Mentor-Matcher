@@ -390,8 +390,10 @@ function sendRequest() {
                   <p><strong>Strengths:</strong> ${profile.strengths.join(', ')}</p>
                   <p><strong>Weaknesses:</strong> ${profile.weaknesses}</p>
                   <p><strong>Personality Traits:</strong> ${profile.personality_traits.join(', ')}</p>
-                  <p><strong>Question 1:</strong> ${profile.questions1}</p>
-                  <p><strong>Question 2:</strong> ${profile.questions2}</p>
+                  <p><strong>Question 1:</strong> ${profile.questionSelection1}</p>
+                  <p><strong>Answer:</strong> ${profile.questions1}</p>
+                  <p><strong>Question 2:</strong> ${profile.questionSelection2}</p>
+                  <p><strong>Answer:</strong> ${profile.questions2}</p>
                   <p><strong>Availability:</strong> ${profile.availability}</p>
                 </div>
                 <button type="button" class="btn" id="sendRequestBtn"  onclick="sendRequest()">Send Request</button>
