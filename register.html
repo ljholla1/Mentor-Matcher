@@ -11,7 +11,7 @@
 <body>
   <h1>Mentorship Matching Platform</h1>
   <div class="container">
-    <h2>Account Information</h2>
+    <h2>Create Your Account</h2>
       <form id="registerForm" action="/register" method="POST" enctype="multipart/form-data">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" placeholder="Enter a username" maxlength="50">
@@ -147,12 +147,12 @@
   event.preventDefault();
 
   const formData = new FormData(registerForm);
-  const profilePicture = document.getElementById("profile_picture").files[0]; // Get the uploaded file
+  // const profilePicture = document.getElementById("profile_picture").files[0]; // Get the uploaded file
 
  // Check if a file was uploaded
- if (profilePicture) {
-      formData.append("profilePicture", profilePicture); // Append the uploaded file to the FormData object
-    }
+//  if (profilePicture) {
+//       formData.append("profilePicture", profilePicture); // Append the uploaded file to the FormData object
+//     }
 
   const credentials = {
     username: formData.get("username"),
@@ -201,13 +201,16 @@
 
     async function registerUser(credentials, formData) {
       try {
+
+        console.log('Data sent to server:', credentials);
+
         const response = await fetch('/register', {
           method: 'POST',
-          // headers: {
-          //   'Content-Type': 'application/json'
-          // },
-          // body: JSON.stringify(credentials)
-          body: formData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+          // body: formData
         });
 
         if (response.ok) {

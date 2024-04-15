@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid'); // Import uuid library
 const path = require('path');
-const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,16 +20,16 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // Define storage for uploaded files
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/') // Choose the directory where files will be stored
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/') // Choose the directory where files will be stored
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 // Define route handlers
 app.get('/register', (req, res) => {
@@ -41,12 +40,15 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+let usersCollection;
+let profilesCollection;
+
 // Start the Express server
 client.connect()
   .then(() => {
     const db = client.db('name_generator');
-    const usersCollection = db.collection("users");
-    const profilesCollection = db.collection("profiles");
+    usersCollection = db.collection("users");
+    profilesCollection = db.collection("profiles");
 
     usersCollection.createIndex({ "userID": 1 }, { unique: true })
       .then(() => {
@@ -132,10 +134,7 @@ client.connect()
     //   }
     // });
 
-app.post('/register', upload.single('profilePicture'), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded');
-  }
+app.post('/register', async (req, res) => {
   
   const { username, password, first_name, last_name, role, linkedin, user_type, workstyle, strengths, weaknesses, personality_traits, questionSelection1, questions1, questionSelection2, questions2, availability, zoom, office, nonoffice, mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, weekendsCheckbox } = req.body;
 
@@ -366,7 +365,7 @@ app.post('/update-profile', async (req, res) => {
 app.get('/profiles', async (req, res) => {
   try {
     const profiles = await profilesCollection.find({}).toArray();
-    res.locals.profiles = profiles; // Store profiles in res.locals
+    // res.locals.profiles = profiles; // Store profiles in res.locals
     res.json(profiles);
   } catch (error) {
     console.error('Error fetching profiles:', error);

@@ -356,7 +356,7 @@ function sendRequest() {
             <img src="/path/to/profile/picture" alt="Profile Picture">
           </div> -->
           <h2 class="videoTitle">${profile.first_name} ${profile.last_name}</h2>
-          <p>${capitalize(profile.user_type)}</p>
+          <p class="mentor-mentee">${capitalize(profile.user_type)}</p>
           <div class="tags">
             ${profile.strengths ? profile.strengths.map(strength => `<span class="tag">${strength}</span>`).join('') : ''}
             ${booleanToTag('Zoom', profile.zoom)}
@@ -410,7 +410,7 @@ function sendRequest() {
       console.error('Error fetching profiles:', error);
     });
 });
-ß
+
 
   </script>
 </body>
