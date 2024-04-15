@@ -244,7 +244,6 @@ app.post('/register', async (req, res) => {
       }
     });
     
-    // Update profile route handler
     app.post('/update-profile', async (req, res) => {
       const { userID, profileData } = req.body;
     
@@ -272,6 +271,7 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Internal Server Error');
       }
     });
+    
     
 
 
