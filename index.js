@@ -245,25 +245,34 @@ app.post('/register', async (req, res) => {
     });
     
     // Update profile route handler
-app.post('/update-profile', async (req, res) => {
-  const { userID, profileData } = req.body;
-
-  try {
-    // Update profile data in the profiles collection
-    const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
-
-    if (result.modifiedCount === 1) {
-      console.log('Profile data updated successfully');
-      res.sendStatus(200);
-    } else {
-      console.error('Failed to update profile data');
-      res.status(500).send('Failed to update profile data');
-    }
-  } catch (error) {
-    console.error('Error updating profile data:', error);
-    res.status(500).send('Internal server error');
-  }
-});
+    app.post('/update-profile', async (req, res) => {
+      const { userID, profileData } = req.body;
+    
+      try {
+        // Check for existing profile with the userID
+        const existingProfile = await profilesCollection.findOne({ userID });
+    
+        if (existingProfile) {
+          // Update profile data in the profiles collection if document exists
+          const result = await profilesCollection.updateOne({ userID }, { $set: profileData });
+    
+          if (result.modifiedCount === 1) {
+            console.log('Profile data updated successfully');
+            res.sendStatus(200);
+          } else {
+            console.error('No changes detected during update');
+            res.sendStatus(200); // Or another appropriate status code (e.g., 304 Not Modified)
+          }
+        } else {
+          console.error('Profile with userID not found');
+          res.status(404).send('Profile not found');
+        }
+      } catch (error) {
+        console.error('Error updating profile data:', error);
+        res.status(500).send('Internal Server Error');
+      }
+    });
+    
 
 
     // Define the route handler to fetch a detailed profile information for a specific user
