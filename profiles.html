@@ -17,7 +17,7 @@
 <body>
   <!-- Request Popup Display------------------------------------------------------------------------------------------------- -->
   <div class="popup" id="popup">
-    <div class="request">
+    <!-- <div class="request">
         <div class="user-info">
           <img src="profile_picutre.png" alt="Profile Picture">
           <h3>Username</h3>
@@ -39,7 +39,7 @@
         <button class="accept-btn" onclick="acceptRequest()">Accept</button>
         <button class="deny-btn" onclick="denyRequest()">Deny</button>
       </div>
-    </div> 
+    </div>  -->
 
     <button type="button" class="btn" onclick="closePopup()">Back</button>
   </div>
@@ -240,6 +240,7 @@ function sendRequest() {
     .then(response => {
       if (response.ok) {
         // Handle the successful response (e.g., display a success message)
+        alert('Request sent successfully!');
         console.log('Request sent successfully');
       } else {
         // Handle the error response
